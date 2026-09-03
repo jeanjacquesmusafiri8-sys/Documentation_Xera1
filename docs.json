@@ -1,85 +1,26 @@
 {
-  "note": "This file was part of the Mintlify starter. Mintlify has been removed and this file was intentionally neutralized to avoid further use. Original content is preserved in the repository history if needed.",
-  "colors": {
-    "primary": "#A92FDF",
-    "light": "#D176F5",
-    "dark": "#7119B8"
-  },
-  "logo": {
-    "light": "/logo/xera-rocket.png",
-    "dark": "/logo/xera-rocket.png"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Démarrage",
-            "pages": [
-              "index",
-              "quickstart",
-              "account-setup"
-            ]
-          },
-          {
-            "group": "Concepts clés",
-            "pages": [
-              "concepts/arcs",
-              "concepts/traces",
-              "concepts/trajectory"
-            ]
-          },
-          {
-            "group": "Fonctionnalités",
-            "pages": [
-              "features/feed",
-              "features/live-streaming",
-              "features/messaging",
-              "features/notifications",
-              "features/search"
-            ]
-          },
-          {
-            "group": "Recruteurs",
-            "pages": [
-              "recruiters/elite-access",
-              "recruiters/talent-search"
-            ]
-          },
-          {
-            "group": "Aide",
-            "pages": [
-              "help/faq",
-              "help/troubleshooting"
-            ]
-          },
-          {
-            "group": "Légal",
-            "pages": [
-              "legal/terms",
-              "legal/privacy",
-              "legal/cookies"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API",
-            "pages": [
-              "api/overview",
-              "api/authentication",
-              "api/feed",
-              "api/interactions",
-              "api/content-metrics"
-            ]
-          }
-        ]
-      }
-    ]
-  }
+    "site": {
+        "name": "XERA1 Docs",
+        "baseUrl": "https://docs.xera1.xyz",
+        "language": "fr",
+        "theme": {
+            "mode": "dark",
+            "primary": "#7c3aed",
+            "background": "#09090b",
+            "panel": "#13131a",
+            "text": "#e4e4e7"
+        }
+    },
+    "navigation": [
+        { "title": "Accueil", "href": "docs.html" },
+        { "title": "Getting started", "href": "getting-started.html" },
+        { "title": "Pro pages", "href": "pro-pages.html" },
+        { "title": "Messaging", "href": "messaging-and-network.html" },
+        { "title": "Search & discovery", "href": "search-and-discovery.html" },
+        {
+            "title": "Trust & verification",
+            "href": "trust-and-verification.html"
+        }
+    ],
+    "status": "standalone-docs-v2"
 }

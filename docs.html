@@ -1,156 +1,361 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Documentation Xera 1, la trajectoire publique des builders.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Xera 1 | Documentation</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-    :root { --ink:#17101d; --muted:#716477; --paper:#fcfaff; --panel:#fff; --line:#eadff0; --accent:#a92fdf; --accent-strong:#7119b8; --soft:#f5e5fc; --header:rgba(252,250,255,.86); --shadow:0 22px 60px rgba(84,22,112,.12); }
-    [data-theme="dark"] { --ink:#f8effd; --muted:#b9a8c1; --paper:#160e1b; --panel:#21152a; --line:#3a2944; --accent:#d176f5; --accent-strong:#e4a1ff; --soft:#382044; --header:rgba(22,14,27,.88); --shadow:0 22px 60px rgba(0,0,0,.36); }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-    body { margin:0; overflow-x:hidden; color:var(--ink); background:var(--paper); font:15px/1.7 'DM Sans', 'Segoe UI', sans-serif; }
-    button, input, textarea { font:inherit; }
-    .app { min-height:100vh; display:grid; grid-template-columns:280px minmax(0,1fr); }
-    aside { position:sticky; top:0; height:100vh; padding:28px 20px; border-right:1px solid var(--line); background:var(--panel); overflow:auto; }
-    .brand { display:flex; align-items:center; gap:10px; margin:0 10px 34px; font:800 20px Manrope, sans-serif; letter-spacing:-.03em; }
-    .mark { width:34px; height:34px; display:block; object-fit:contain; }
-    nav h2 { margin:25px 10px 8px; color:var(--muted); font:700 10px/1.2 'DM Sans',sans-serif; letter-spacing:.1em; text-transform:uppercase; }
-    nav a { display:flex; align-items:center; gap:8px; padding:7px 10px; color:var(--muted); border-radius:6px; text-decoration:none; transition:background .2s,color .2s,transform .2s; }
-    nav a::before { content:'›'; opacity:.4; }
-    nav a:hover, nav a.active { color:var(--accent-strong); background:var(--accent-soft); transform:translateX(2px); }
-    main { min-width:0; }
-    header { position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:12px; min-height:66px; padding:12px clamp(20px,5vw,72px); border-bottom:1px solid var(--line); background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(16px); }
-    .crumb { color:var(--muted); font-size:13px; white-space:nowrap; }
-    .crumb b { color:var(--ink); font-weight:600; }
-    .top-actions { display:flex; align-items:center; gap:8px; margin-left:auto; }
-    .search { width:min(300px,35vw); display:flex; align-items:center; gap:9px; padding:8px 12px; border:1px solid var(--line); border-radius:7px; background:var(--panel); color:var(--muted); box-shadow:0 2px 8px #193c2b08; }
-    .search input { width:100%; border:0; outline:0; color:var(--ink); background:transparent; }
-    .key-button, .icon-btn { display:inline-flex; align-items:center; justify-content:center; gap:7px; height:34px; cursor:pointer; border:1px solid var(--line); border-radius:7px; color:var(--ink); background:var(--panel); transition:transform .2s,border-color .2s; }
-    .key-button { padding:0 11px; font-size:12px; }
-    .icon-btn { width:34px; }
-    .key-button:hover, .icon-btn:hover { border-color:var(--accent); transform:translateY(-1px); }
-    .content { width:min(1050px,100%); margin:auto; padding:84px clamp(22px,7vw,100px) 120px; }
-    .hero { position:relative; overflow:hidden; padding:70px 24px 64px; text-align:center; border-bottom:1px solid var(--line); }
-    .hero::before { content:''; position:absolute; inset:0 8%; z-index:-1; opacity:.58; background:radial-gradient(ellipse at 50% 12%, var(--accent-soft), transparent 64%); }
-    .eyebrow { color:var(--accent-strong); font:700 12px ui-sans-serif,system-ui,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
-    h1, h2, h3 { font-family:Manrope,'DM Sans',sans-serif; letter-spacing:-.045em; }
-    h1 { max-width:760px; margin:16px auto 18px; font-size:clamp(42px,6vw,72px); line-height:1.01; font-weight:800; }
-    h2 { margin-top:64px; font-size:30px; line-height:1.14; font-weight:700; }
-    h3 { margin-top:30px; font-size:18px; letter-spacing:-.02em; }
-    .lead { max-width:680px; color:var(--muted); font-size:19px; line-height:1.55; }
-    .hero-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:720px; margin:50px auto 0; text-align:left; }
-    .platform-button { display:inline-flex; align-items:center; gap:9px; margin-top:28px; padding:12px 18px; border-radius:7px; color:#fff; background:var(--accent-strong); text-decoration:none; font:600 14px 'DM Sans',sans-serif; box-shadow:0 10px 24px rgba(113,25,184,.22); transition:transform .2s,box-shadow .2s; }
-    .platform-button:hover { transform:translateY(-2px); box-shadow:0 14px 28px rgba(113,25,184,.3); }
-    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:26px; }
-    .card { display:block; padding:20px; border:1px solid var(--line); border-radius:9px; background:var(--panel); text-decoration:none; box-shadow:var(--shadow); transition:transform .2s,border-color .2s; }
-    .card:hover { border-color:var(--accent); transform:translateY(-3px); }
-    .card strong { display:block; margin-bottom:6px; color:var(--ink); font:600 15px 'DM Sans',sans-serif; }
-    .card span { color:var(--muted); font-size:13px; line-height:1.5; }
-    .card .arrow { float:right; color:var(--accent); font-size:18px; }
-    section { scroll-margin-top:85px; animation:rise .6s both; }
-    @keyframes rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
-    .concept-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-    .concept { padding:18px; border-top:2px solid var(--accent); background:var(--panel); }
-    .concept strong { display:block; margin-bottom:5px; font:700 16px Manrope,sans-serif; }
-    .concept span { color:var(--muted); font-size:13px; }
-    .callout { margin:28px 0; padding:18px 20px; border-left:3px solid var(--accent); background:var(--accent-soft); }
-    code { padding:2px 5px; border-radius:4px; background:var(--accent-soft); font-size:.9em; }
-    pre { max-width:100%; overflow:auto; white-space:pre-wrap; word-break:break-word; }
-    .results { display:none; position:absolute; top:58px; right:clamp(22px,5vw,76px); width:min(390px,65vw); padding:6px; border:1px solid var(--line); border-radius:7px; background:var(--panel); box-shadow:var(--shadow); }
-    .results.open { display:block; }
-    .results button { width:100%; padding:8px; cursor:pointer; border:0; text-align:left; color:var(--ink); background:transparent; border-radius:4px; }
-    .results button:hover { background:var(--accent-soft); }
-    .mobile-nav { display:none; }
-    dialog { width:min(460px,calc(100% - 32px)); padding:0; border:1px solid var(--line); border-radius:12px; color:var(--ink); background:var(--panel); box-shadow:var(--shadow); }
-    dialog::backdrop { background:#08100c99; backdrop-filter:blur(4px); }
-    .dialog-head { display:flex; justify-content:space-between; align-items:center; padding:20px 22px 14px; border-bottom:1px solid var(--line); }
-    .dialog-head h2 { margin:0; font-size:20px; }
-    .dialog-body { padding:20px 22px 22px; }
-    .dialog-body p { margin:0 0 16px; color:var(--muted); font-size:13px; }
-    label { display:block; margin:10px 0 6px; font-size:12px; font-weight:600; }
-    input[type="password"], textarea { width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:7px; outline:0; color:var(--ink); background:var(--paper); }
-    input:focus, textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
-    .dialog-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:16px; }
-    .primary, .ghost { padding:9px 14px; cursor:pointer; border-radius:7px; font-weight:600; }
-    .primary { border:0; color:#fff; background:var(--accent-strong); }
-    .ghost { border:1px solid var(--line); color:var(--ink); background:transparent; }
-    .chat { position:fixed; right:24px; bottom:24px; z-index:4; width:min(390px,calc(100vw - 32px)); display:none; overflow:hidden; border:1px solid var(--line); border-radius:12px; background:var(--panel); box-shadow:var(--shadow); }
-    .chat.open { display:block; animation:rise .25s both; }
-    .chat-head { display:flex; justify-content:space-between; align-items:center; padding:15px 17px; color:#fff; background:#123c2a; }
-    .chat-head strong { font:600 14px Manrope,sans-serif; }
-    .chat-log { max-height:300px; overflow:auto; padding:15px; font-size:13px; }
-    .message { margin:0 0 12px; padding:9px 11px; border-radius:8px; background:var(--accent-soft); }
-    .message.user { margin-left:28px; background:var(--line); }
-    .chat-form { display:flex; gap:7px; padding:10px; border-top:1px solid var(--line); }
-    .chat-form input { flex:1; min-width:0; padding:9px; border:1px solid var(--line); border-radius:6px; color:var(--ink); background:var(--paper); outline:0; }
-    .chat-form button { width:38px; border:0; border-radius:6px; color:#fff; background:var(--accent-strong); cursor:pointer; }
-    @media (max-width:760px) { .app { display:block; } aside { display:none; position:fixed; top:0; left:0; z-index:8; width:280px; box-shadow:var(--shadow); } aside.open { display:block; } .mobile-nav { display:block; } header { padding:12px 16px; } .crumb { display:none; } .top-actions { width:100%; } .search { width:auto; flex:1; } .key-button { font-size:0; width:34px; padding:0; } .key-button span { font-size:15px; } .content { padding:48px 20px 72px; } .hero { padding:52px 5px 48px; } .hero-links { grid-template-columns:1fr; margin-top:35px; } h1 { font-size:43px; } .concept-grid { grid-template-columns:1fr; } .chat { right:16px; bottom:16px; } }
-  </style>
-</head>
-<body>
-  <div class="app">
-    <aside>
-      <div class="brand"><img class="mark" src="logo/xera-rocket.png" alt="Logo Xera 1"> Xera 1</div>
-      <nav id="sidebar"></nav>
-    </aside>
-    <main>
-      <header>
-        <div class="mobile-nav"><button class="icon-btn" id="menu" aria-label="Afficher la navigation">☰</button></div>
-        <div class="crumb">Documentation <span>/</span> <b>Introduction</b></div>
-        <div class="top-actions"><div class="search">⌕ <input id="search" type="search" placeholder="Rechercher" aria-label="Rechercher dans la documentation"></div><button class="key-button" id="assistant" title="Ouvrir l'assistant Gemini"><span>✦</span> Assistant</button><button class="icon-btn" id="theme" aria-label="Changer de thème" title="Changer de thème">◐</button></div>
-        <div id="results" class="results"></div>
-      </header>
-      <article class="content" id="article">
-        <section class="hero">
-          <div class="eyebrow">Documentation Xera 1</div>
-          <h1>Construisez en public. Laissez une trace.</h1>
-          <p class="lead">Xera 1 transforme vos projets, votre progression quotidienne et votre historique d'exécution en une trajectoire de preuve de travail visible.</p>
-          <a class="platform-button" href="https://xera1.xyz" target="_blank" rel="noopener noreferrer">Commencer / Get started <span aria-hidden="true">↗</span></a>
-            <div class="hero-links">
-            <a class="card" href="#quickstart"><span class="arrow">↗</span><strong>Bien démarrer</strong><span>Créez votre compte, votre premier ARC et votre première Trace.</span></a>
-            <a class="card" href="#concepts"><span class="arrow">↗</span><strong>Concepts clés</strong><span>Comprenez les ARCs, les Traces et la Trajectory.</span></a>
-            <a class="card" href="#features"><span class="arrow">↗</span><strong>Fonctionnalités</strong><span>Explorez le feed, le direct, la messagerie et la recherche.</span></a>
-            <a class="card" href="#api"><span class="arrow">↗</span><strong>Référence API</strong><span>Intégrez les données Xera 1 à vos outils.</span></a>
-          </div>
-        </section>
-        <section id="quickstart"><h2>Bien démarrer</h2><p>Après votre inscription, complétez votre profil, ouvrez un ARC pour structurer un objectif, puis publiez une Trace pour enregistrer ce que vous avez réellement construit ou appris.</p><div class="callout"><strong>Le principe Xera 1 :</strong> la régularité et la preuve concrète comptent davantage qu'un profil parfait.</div></section>
-        <section id="account-setup"><h2>Configurer son compte</h2><p>Ajoutez votre nom d'utilisateur, votre nom affiché, votre bio et votre domaine d'activité. Dans les paramètres, contrôlez ensuite vos notifications et la sécurité de votre compte.</p></section>
-        <section id="concepts"><h2>Concepts clés</h2><div class="concept-grid"><div class="concept"><strong>ARC</strong><span>Un projet ou objectif structuré avec des jalons et un historique de progression.</span></div><div class="concept"><strong>Trace</strong><span>Une mise à jour horodatée de votre travail réel, avec texte, médias ou métriques.</span></div><div class="concept"><strong>Trajectory</strong><span>La timeline publique qui rend visibles votre constance, votre élan et vos progrès.</span></div></div></section>
-        <section id="features"><h2>Fonctionnalités</h2><h3>Feed et découverte</h3><p>Le feed rassemble les Traces des builders que vous suivez et propose des découvertes pertinentes selon la constance, le domaine et la qualité du contenu.</p><h3>Diffusion en direct</h3><p>Montrez votre processus en temps réel et échangez avec votre audience grâce au chat.</p><h3>Messagerie et notifications</h3><p>Contactez les builders concernés et contrôlez les alertes qui vous tiennent informé.</p><h3>Recherche</h3><p>Trouvez des builders, des ARCs et des Traces par nom, domaine, étape ou mot-clé.</p></section>
-        <section id="recruiters"><h2>Pour les recruteurs</h2><p>L'accès Elite permet de rechercher des builders vérifiés avec des filtres basés sur la constance, la Trajectory, le domaine et les ARCs actifs.</p></section>
-        <section id="help"><h2>Aide et règles</h2><p>Consultez la FAQ et le dépannage pour les problèmes de compte, de notifications, de direct et de performance. Les pages légales détaillent la confidentialité, les cookies et les conditions d'utilisation.</p></section>
-        <section id="api"><h2>Référence API</h2><p>L'API REST de Xera 1 donne accès aux profils, ARCs, Traces, interactions et métriques.</p><pre><code>GET https://api.xera1.xyz/v1/profiles/{username}/metrics</code></pre><p>Authentifiez chaque requête avec un token Bearer et protégez vos identifiants dans une variable d'environnement.</p></section>
-      </article>
-    </main>
-  </div>
-  <dialog id="settings">
-    <div class="dialog-head"><h2>Assistant Gemini</h2><button class="icon-btn" id="close-settings" aria-label="Fermer">×</button></div>
-    <div class="dialog-body"><p>La clé est protégée par le serveur et n’est jamais enregistrée dans cette page.</p><pre><code>GEMINI_API_KEY=AIza_votre_cle</code></pre><p>Copiez `.env.example` vers `.env`, remplacez la valeur, puis redémarrez le serveur avec <code>node server.js</code>.</p><div class="dialog-actions"><button class="primary" id="close-settings-action">Compris</button></div></div>
-  </dialog>
-  <section class="chat" id="chat" aria-label="Assistant Gemini"><div class="chat-head"><strong>✦ Assistant Xera 1</strong><span><button class="icon-btn" id="edit-settings" aria-label="Modifier la clé">⚙</button><button class="icon-btn" id="close-chat" aria-label="Fermer">×</button></span></div><div class="chat-log" id="chat-log"><div class="message">Bonjour. Je peux répondre aux questions sur cette documentation et la plateforme Xera 1.</div></div><form class="chat-form" id="chat-form"><input id="question" placeholder="Posez une question..." autocomplete="off"><button aria-label="Envoyer">↑</button></form></section>
-  <script>
-    const groups = { 'Démarrage':['quickstart','account-setup'], 'Concepts clés':['concepts'], 'Fonctionnalités':['features'], 'Recruteurs':['recruiters'], 'Aide':['help'], 'API Reference':['api'] };
-    const labels = { quickstart:'Démarrage rapide', 'account-setup':'Configurer son compte', concepts:'ARCs, Traces et Trajectory', features:'Fonctionnalités', recruiters:'Accès Elite', help:'Aide et règles', api:'Référence API' };
-    const sidebar = document.querySelector('#sidebar');
-    Object.entries(groups).forEach(([group, items]) => { const title=document.createElement('h2'); title.textContent=group; sidebar.append(title); items.forEach(id => { const link=document.createElement('a'); link.href='#'+id; link.textContent=labels[id]; sidebar.append(link); }); });
-    const links=[...sidebar.querySelectorAll('a')]; const results=document.querySelector('#results'); const input=document.querySelector('#search');
-    input.addEventListener('input', () => { const query=input.value.trim().toLowerCase(); results.innerHTML=''; if(!query){results.classList.remove('open');return;} links.filter(link=>link.textContent.toLowerCase().includes(query)).forEach(link=>{const result=document.createElement('button');result.textContent=link.textContent;result.onclick=()=>{location.hash=link.hash.slice(1);results.classList.remove('open');input.value='';};results.append(result);}); results.classList.toggle('open',results.children.length>0); });
-    document.querySelector('#theme').onclick=()=>{const dark=document.documentElement.dataset.theme==='dark'; document.documentElement.dataset.theme=dark?'':'dark'; localStorage.setItem('xera-theme',dark?'light':'dark');};
-    if(localStorage.getItem('xera-theme')==='dark') document.documentElement.dataset.theme='dark';
-    const settings=document.querySelector('#settings'), chat=document.querySelector('#chat');
-    document.querySelector('#assistant').onclick=()=>chat.classList.add('open');
-    document.querySelector('#close-settings').onclick=()=>settings.close();
-    document.querySelector('#close-settings-action').onclick=()=>settings.close();
-    document.querySelector('#edit-settings').onclick=()=>{chat.classList.remove('open');settings.showModal();};
-    document.querySelector('#close-chat').onclick=()=>chat.classList.remove('open');
-    document.querySelector('#menu').onclick=()=>{const panel=document.querySelector('aside');panel.classList.toggle('open');};
-    document.querySelector('#chat-form').onsubmit=async(event)=>{event.preventDefault();const input=document.querySelector('#question'),question=input.value.trim(),log=document.querySelector('#chat-log');if(!question)return;const user=document.createElement('div');user.className='message user';user.textContent=question;log.append(user);input.value='';const loading=document.createElement('div');loading.className='message';loading.textContent='Je cherche dans toute la documentation...';log.append(loading);try{const response=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});const data=await response.json();if(!response.ok)throw new Error(data.error||'API error');loading.textContent=data.answer||'Je n’ai pas trouvé de réponse.';}catch(error){loading.textContent=error.message.includes('GEMINI_API_KEY')?'Ajoutez GEMINI_API_KEY dans le fichier .env à la racine, puis redémarrez node server.js.':'Impossible de contacter le serveur Gemini. Vérifiez que node server.js est lancé.';}};
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(link=>link.classList.toggle('active',link.hash==='#'+entry.target.id));}}),{rootMargin:'-20% 0px -65%'}); document.querySelectorAll('section[id]').forEach(section=>observer.observe(section));
-  </script>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Documentation XERA1 — Proof of Building, pages PRO, messagerie, sécurité et équipe fondatrice."
+        />
+        <link rel="icon" href="logo.png" type="image/png" />
+        <title>XERA1 Docs</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="brand-wrap">
+                    <img src="logo.png" alt="XERA1 logo" class="brand-logo" />
+                    <div>
+                        <div class="brand-name">XERA1</div>
+                        <div class="brand-tag">Docs</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-search" id="sidebar-search">
+                    <span>⌘K</span>
+                    <input
+                        type="search"
+                        placeholder="Search docs"
+                        aria-label="Rechercher dans la documentation"
+                    />
+                </div>
+
+                <nav
+                    class="sidebar-nav"
+                    aria-label="Navigation de documentation"
+                >
+                    <div class="nav-section-title">Documentation</div>
+                    <a class="nav-item active" href="docs.html">Accueil</a>
+                    <a class="nav-item" href="getting-started.html"
+                        >Getting started</a
+                    >
+                    <a class="nav-item" href="pro-pages.html">Pro pages</a>
+                    <a class="nav-item" href="messaging-and-network.html"
+                        >Messaging</a
+                    >
+                    <a class="nav-item" href="search-and-discovery.html"
+                        >Search & discovery</a
+                    >
+                    <a class="nav-item" href="trust-and-verification.html"
+                        >Trust & verification</a
+                    >
+                    <a class="nav-item" href="founding-team.html"
+                        >Founding team</a
+                    >
+                </nav>
+            </aside>
+
+            <main class="main-panel">
+                <header class="topbar">
+                    <div class="crumb">
+                        Documentation <span>›</span> <strong>Overview</strong>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="ghost-button" id="command-k-trigger">
+                            Search docs
+                        </button>
+                    </div>
+                </header>
+
+                <div class="content-wrap">
+                    <article class="doc-page landing-page">
+                        <section class="hero-block">
+                            <div class="eyebrow">DOCUMENTATION XERA1</div>
+                            <h1 class="hero-title">
+                                <span>Build in public.</span>
+                                <span class="gradient-word">Prove it.</span>
+                                <span>Win trust.</span>
+                            </h1>
+                            <p class="lead">
+                                XERA1 transforme la progression réelle en une
+                                preuve publique, exploitée par des builders, des
+                                entreprises et des communautés qui veulent faire
+                                confiance à des résultats concrets.
+                            </p>
+                            <div class="hero-actions">
+                                <a
+                                    class="primary-btn"
+                                    href="getting-started.html"
+                                    >Commencer</a
+                                >
+                                <a class="secondary-btn" href="pro-pages.html"
+                                    >Voir les pages PRO</a
+                                >
+                            </div>
+                        </section>
+
+                        <section class="info-grid three-up">
+                            <div class="info-card">
+                                <span class="card-kicker">01</span>
+                                <h3>Preuve d'exécution</h3>
+                                <p>
+                                    Chaque média, chaque jalon et chaque mise à
+                                    jour devient une trace vérifiable de travail
+                                    réel.
+                                </p>
+                            </div>
+                            <div class="info-card">
+                                <span class="card-kicker">02</span>
+                                <h3>Trajectoire publique</h3>
+                                <p>
+                                    Votre profil raconte la réalité de votre
+                                    progression, pas seulement un résumé de
+                                    présentation.
+                                </p>
+                            </div>
+                            <div class="info-card">
+                                <span class="card-kicker">03</span>
+                                <h3>Confiance B2B</h3>
+                                <p>
+                                    Les entreprises utilisent les pages PRO pour
+                                    qualifier, capter des leads et engager des
+                                    builders crédibles.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="section-block">
+                            <div class="section-heading">
+                                <div>
+                                    <div class="eyebrow">Parcours</div>
+                                    <h2>Commencer en moins de 10 minutes</h2>
+                                </div>
+                            </div>
+                            <div class="steps-list">
+                                <div class="step-item">
+                                    <span class="step-no">1</span>
+                                    <div>
+                                        <h3>Créer son compte</h3>
+                                        <p>
+                                            Inscription avec email, magic link
+                                            ou OTP. Configurez votre identité et
+                                            votre visibilité.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <span class="step-no">2</span>
+                                    <div>
+                                        <h3>Publier sa première preuve</h3>
+                                        <p>
+                                            Ajoutez un média, écrivez une
+                                            description immersive et attachez
+                                            votre preuve à un jalon concret.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="step-item">
+                                    <span class="step-no">3</span>
+                                    <div>
+                                        <h3>Construire une présence</h3>
+                                        <p>
+                                            Activez votre page PRO, ajoutez
+                                            votre CTA et optimisez votre
+                                            visibilité dans le feed.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="section-block">
+                            <div class="section-heading">
+                                <div>
+                                    <div class="eyebrow">Thèmes</div>
+                                    <h2>Documentation guidée</h2>
+                                </div>
+                            </div>
+
+                            <div class="card-grid">
+                                <a class="doc-card" href="getting-started.html">
+                                    <div class="doc-card-top">🚀</div>
+                                    <h3>Getting started</h3>
+                                    <p>
+                                        Créer un compte, compléter l'onboarding
+                                        et publier la première preuve.
+                                    </p>
+                                </a>
+                                <a class="doc-card" href="pro-pages.html">
+                                    <div class="doc-card-top">💼</div>
+                                    <h3>Pro pages</h3>
+                                    <p>
+                                        Créer une page entreprise, un CTA, un
+                                        pitch deck et une vitrine de conversion.
+                                    </p>
+                                </a>
+                                <a
+                                    class="doc-card"
+                                    href="messaging-and-network.html"
+                                >
+                                    <div class="doc-card-top">💬</div>
+                                    <h3>Messaging & network</h3>
+                                    <p>
+                                        Utiliser la messagerie dédiée, partager
+                                        des preuves et interagir avec les
+                                        entreprises.
+                                    </p>
+                                </a>
+                                <a
+                                    class="doc-card"
+                                    href="search-and-discovery.html"
+                                >
+                                    <div class="doc-card-top">🔍</div>
+                                    <h3>Search & discovery</h3>
+                                    <p>
+                                        Explorer le feed immersif, la palette de
+                                        recherche et la découverte contextuelle.
+                                    </p>
+                                </a>
+                                <a
+                                    class="doc-card"
+                                    href="trust-and-verification.html"
+                                >
+                                    <div class="doc-card-top">🛡️</div>
+                                    <h3>Trust & verification</h3>
+                                    <p>
+                                        Comprendre le badge XERA1, la provenance
+                                        des médias et la transparence.
+                                    </p>
+                                </a>
+                                <a class="doc-card" href="founding-team.html">
+                                    <div class="doc-card-top">🤝</div>
+                                    <h3>Founding team</h3>
+                                    <p>
+                                        Découvrir les fondateurs de XERA1 et la
+                                        vision portée par une équipe congolaise.
+                                    </p>
+                                </a>
+                            </div>
+                        </section>
+
+                        <section class="section-block">
+                            <div class="section-heading">
+                                <div>
+                                    <div class="eyebrow">Produit</div>
+                                    <h2>Comment XERA1 se distingue</h2>
+                                </div>
+                            </div>
+                            <div class="feature-columns">
+                                <div>
+                                    <h3>Le feed immersif</h3>
+                                    <p>
+                                        Navigation verticale, plongée en plein
+                                        écran et mise en avant des étapes de
+                                        construction.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3>La command palette</h3>
+                                    <p>
+                                        Recherche précise par catégories,
+                                        tendances et historique éclairé par 7
+                                        jours de contexte.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3>Le badge de vérification</h3>
+                                    <p>
+                                        Une signalétique qui donne de la
+                                        crédibilité aux profils et aux contenus
+                                        authentifiés.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <button
+            class="assistant-launcher"
+            id="assistant-launcher"
+            type="button"
+            aria-label="Ouvrir l’assistant XERA1"
+        >
+            <span class="assistant-icon">✦</span>
+            <span>Ask XERA1 AI</span>
+        </button>
+
+        <div
+            class="assistant-panel hidden"
+            id="assistant-panel"
+            aria-hidden="true"
+        >
+            <div class="assistant-header">
+                <div class="assistant-title">
+                    <span class="assistant-icon tiny">✦</span>
+                    <span>XERA1 Docs AI</span>
+                </div>
+                <button
+                    type="button"
+                    class="assistant-close"
+                    id="assistant-close"
+                    aria-label="Fermer"
+                >
+                    ×
+                </button>
+            </div>
+            <div id="gemini-answer" class="gemini-answer">
+                Posez vos questions sur l’architecture, les APIs ou le Proof of
+                Building XERA1.
+            </div>
+            <form id="gemini-form" class="gemini-form">
+                <div class="input-shell">
+                    <input
+                        id="gemini-question"
+                        type="text"
+                        placeholder="Posez votre question..."
+                        aria-label="Question à Gemini"
+                    />
+                    <button
+                        type="submit"
+                        class="send-button"
+                        id="gemini-send"
+                        aria-label="Envoyer"
+                    >
+                        ➤
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div
+            class="search-overlay hidden"
+            id="search-overlay"
+            aria-hidden="true"
+        >
+            <div class="search-panel">
+                <div class="search-input-row">
+                    <span class="search-icon">⌕</span>
+                    <input
+                        type="search"
+                        id="global-search-input"
+                        placeholder="Search the docs"
+                        aria-label="Recherche rapide"
+                    />
+                    <button
+                        class="close-search"
+                        aria-label="Fermer la recherche"
+                    >
+                        ×
+                    </button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
 </html>

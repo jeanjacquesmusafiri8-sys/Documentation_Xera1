@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Trust & verification | XERA1 Docs</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="brand-wrap">
+                    <img src="logo.png" alt="XERA1 logo" class="brand-logo" />
+                    <div>
+                        <div class="brand-name">XERA1</div>
+                        <div class="brand-tag">Docs</div>
+                    </div>
+                </div>
+                <div class="sidebar-search">
+                    <span>⌘K</span>
+                    <input
+                        type="search"
+                        placeholder="Search docs"
+                        aria-label="Rechercher"
+                    />
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Documentation</div>
+                    <a class="nav-item" href="docs.html">Accueil</a>
+                    <a class="nav-item" href="getting-started.html"
+                        >Getting started</a
+                    >
+                    <a class="nav-item" href="pro-pages.html">Pro pages</a>
+                    <a class="nav-item" href="messaging-and-network.html"
+                        >Messaging</a
+                    >
+                    <a class="nav-item" href="search-and-discovery.html"
+                        >Search & discovery</a
+                    >
+                    <a
+                        class="nav-item active"
+                        href="trust-and-verification.html"
+                        >Trust & verification</a
+                    >
+                </nav>
+            </aside>
+
+            <main class="main-panel">
+                <header class="topbar">
+                    <div class="crumb">
+                        Documentation <span>›</span>
+                        <strong>Trust & verification</strong>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="ghost-button" id="command-k-trigger">
+                            Search docs
+                        </button>
+                    </div>
+                </header>
+
+                <div class="content-wrap">
+                    <article class="doc-article">
+                        <div class="eyebrow">05 / Trust & verification</div>
+                        <h1>Badge de certification et authenticité</h1>
+
+                        <p>
+                            La confiance est centrale dans XERA1. Pour qu’un
+                            builder ou une entreprise soit crédible, sa présence
+                            doit être compréhensible, vérifiable et à la fois
+                            transparente et lisible.
+                        </p>
+
+                        <h2>1. Le badge de certification XERA1</h2>
+                        <p>
+                            Le badge de certification atteste qu’un profil ou
+                            une page est cohérent avec les standards du réseau :
+                            présence claire, construit en public, preuve
+                            d’exécution et activité continue.
+                        </p>
+
+                        <ul>
+                            <li>présence structurée,</li>
+                            <li>preuves récentes et visibles,</li>
+                            <li>activité crédible et cohérente,</li>
+                            <li>
+                                alignement avec les standards d’authenticité.
+                            </li>
+                        </ul>
+
+                        <h2>2. Provenance média et transparence</h2>
+                        <p>
+                            Les médias publiés sur XERA1 doivent être lisibles
+                            comme des traces de travail, pas comme des contenus
+                            détachés du contexte. La provenance et la cohérence
+                            du récit importent autant que le support lui-même.
+                        </p>
+
+                        <div class="callout">
+                            <strong>Best practice :</strong> Expliquez ce que le
+                            média montre, le contexte, les résultats obtenus et
+                            la date ou l’étape associée.
+                        </div>
+
+                        <h2>3. Sécurité et signalement</h2>
+                        <p>
+                            La plateforme permet de protéger la qualité du
+                            réseau et d’éviter les contenus trompeurs ou
+                            inappropriés. Les signalements sont gérés dans le
+                            cadre d’un environnement de confiance.
+                        </p>
+
+                        <ul>
+                            <li>signaler un message ou un contenu abusif,</li>
+                            <li>revérifier l’origine et le contexte,</li>
+                            <li>
+                                maintenir une sphère de confiance propre aux
+                                builders.
+                            </li>
+                        </ul>
+
+                        <h2>4. Pourquoi c’est important</h2>
+                        <p>
+                            Sans signal de confiance, la plateforme se détériore
+                            en bruit. XERA1 s’appuie sur la notion de “preuve de
+                            travail” pour rendre les interactions plus
+                            pertinentes et plus fiables.
+                        </p>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <div
+            class="search-overlay hidden"
+            id="search-overlay"
+            aria-hidden="true"
+        >
+            <div class="search-panel">
+                <div class="search-input-row">
+                    <span class="search-icon">⌕</span>
+                    <input
+                        type="search"
+                        id="global-search-input"
+                        placeholder="Search the docs"
+                        aria-label="Recherche rapide"
+                    />
+                    <button class="close-search" aria-label="Fermer">×</button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

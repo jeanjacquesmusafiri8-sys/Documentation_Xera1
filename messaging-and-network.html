@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Messaging & network | XERA1 Docs</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="brand-wrap">
+                    <img src="logo.png" alt="XERA1 logo" class="brand-logo" />
+                    <div>
+                        <div class="brand-name">XERA1</div>
+                        <div class="brand-tag">Docs</div>
+                    </div>
+                </div>
+                <div class="sidebar-search">
+                    <span>⌘K</span>
+                    <input
+                        type="search"
+                        placeholder="Search docs"
+                        aria-label="Rechercher"
+                    />
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Documentation</div>
+                    <a class="nav-item" href="docs.html">Accueil</a>
+                    <a class="nav-item" href="getting-started.html"
+                        >Getting started</a
+                    >
+                    <a class="nav-item" href="pro-pages.html">Pro pages</a>
+                    <a class="nav-item active" href="messaging-and-network.html"
+                        >Messaging</a
+                    >
+                    <a class="nav-item" href="search-and-discovery.html"
+                        >Search & discovery</a
+                    >
+                    <a class="nav-item" href="trust-and-verification.html"
+                        >Trust & verification</a
+                    >
+                </nav>
+            </aside>
+
+            <main class="main-panel">
+                <header class="topbar">
+                    <div class="crumb">
+                        Documentation <span>›</span> <strong>Messaging</strong>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="ghost-button" id="command-k-trigger">
+                            Search docs
+                        </button>
+                    </div>
+                </header>
+
+                <div class="content-wrap">
+                    <article class="doc-article">
+                        <div class="eyebrow">03 / Messaging & network</div>
+                        <h1>Utiliser la messagerie dédiée</h1>
+
+                        <p>
+                            La messagerie XERA1 permet de passer de la simple
+                            découverte à une vraie relation. Vous pouvez envoyer
+                            des messages directs, partager une preuve, demander
+                            une clarification ou créer un premier contact
+                            qualifié.
+                        </p>
+
+                        <h2>1. Envoyer un message</h2>
+                        <ol>
+                            <li>
+                                Ouvrez la messagerie depuis votre tableau de
+                                bord ou le profil d’un builder.
+                            </li>
+                            <li>Choisissez le contact ou l’entreprise.</li>
+                            <li>
+                                Rédigez le message avec contexte et objectif.
+                            </li>
+                            <li>Ajoutez des pièces jointes si nécessaire.</li>
+                            <li>Envoyez la demande.</li>
+                        </ol>
+
+                        <div class="callout">
+                            <strong>Good practice :</strong> Un message utile
+                            parle de contexte, de preuve et de la raison du
+                            contact. Ex.: “Je viens de publier la version beta
+                            de mon MVP et j’aimerais obtenir votre point de vue
+                            sur le parcours d’inscription.”
+                        </div>
+
+                        <h2>2. Partager des preuves</h2>
+                        <p>
+                            Les messages peuvent inclure des captures, des liens
+                            vers des jalons, des démonstrations ou des
+                            références d’exécution. Cela permet de rendre le
+                            dialogue concret et crédible.
+                        </p>
+
+                        <ul>
+                            <li>
+                                Partager une capture d’écran de progression.
+                            </li>
+                            <li>
+                                Envoyer un lien vers un jalon ou une preuve.
+                            </li>
+                            <li>
+                                Joindre un court devis ou un point de contexte.
+                            </li>
+                        </ul>
+
+                        <h2>3. Interagir avec les pages PRO</h2>
+                        <p>
+                            Comme builder, vous pouvez contacter une entreprise
+                            via sa page PRO. Comme entreprise, vous pouvez
+                            répondre au nom de votre marque, dans un cadre plus
+                            formel et orienté conversion.
+                        </p>
+
+                        <ul>
+                            <li>
+                                Les builders peuvent initier une conversation.
+                            </li>
+                            <li>
+                                Les entreprises peuvent répondre directement
+                                depuis la page.
+                            </li>
+                            <li>
+                                Une conversation bien cadrée transforme la
+                                découverte en opportunité.
+                            </li>
+                        </ul>
+
+                        <h2>4. Bonnes pratiques</h2>
+                        <p>Gardez vos messages clairs, bref et utiles.</p>
+
+                        <ul>
+                            <li>Précisez votre objectif.</li>
+                            <li>Faites référence à un fait concret.</li>
+                            <li>Demandez une réponse simple et mesurable.</li>
+                            <li>
+                                Ne partagez jamais d’informations sensibles dans
+                                le chat.
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <div
+            class="search-overlay hidden"
+            id="search-overlay"
+            aria-hidden="true"
+        >
+            <div class="search-panel">
+                <div class="search-input-row">
+                    <span class="search-icon">⌕</span>
+                    <input
+                        type="search"
+                        id="global-search-input"
+                        placeholder="Search the docs"
+                        aria-label="Recherche rapide"
+                    />
+                    <button class="close-search" aria-label="Fermer">×</button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

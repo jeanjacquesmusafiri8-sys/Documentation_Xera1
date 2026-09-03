@@ -1,0 +1,156 @@
+---
+title: "Guide utilisateur complet de XERA1"
+sidebarTitle: "Guide utilisateur"
+description: "Guide de référence pour comprendre les concepts, les parcours et les limites documentées de XERA1."
+---
+
+# Guide utilisateur complet
+
+Ce guide rassemble les informations utilisateur présentes dans la documentation XERA1. Il explique les concepts, les parcours prévus et les précautions à prendre avant de se fier à une fonction ou à une valeur chiffrée.
+
+## À propos de ce guide
+
+Le dépôt contient deux choses distinctes :
+
+- la documentation produit, qui décrit les parcours et les fonctionnalités attendues de XERA1 ;
+- un site local de documentation, servi par `server.js`, avec une recherche et un assistant Gemini optionnel.
+
+Le dépôt local ne contient pas l'application complète XERA1 ni une preuve d'exécution de tous les endpoints, paiements, notifications, lives ou fonctions recruteur décrits dans certaines pages. Les exemples d'API, tarifs, quotas, délais, scores et résultats annoncés doivent donc être confirmés contre l'environnement réellement déployé avant toute utilisation opérationnelle.
+
+## Comprendre XERA1
+
+XERA1 est présentée comme une plateforme destinée aux personnes qui construisent un projet, une compétence ou un produit. Son modèle documentaire repose sur trois notions :
+
+- **ARC** : un projet ou un objectif structuré ;
+- **Trace** : une mise à jour datée qui décrit un travail réalisé, un apprentissage ou un résultat ;
+- **Trajectory** : la vue dans le temps de la progression et de la régularité documentées.
+
+L'objectif est de montrer une progression suivie plutôt qu'un résultat isolé. Une publication doit donc décrire ce qui a réellement été fait et, lorsque c'est utile, fournir une preuve comme une capture, une démonstration ou une mesure.
+
+## Parcours recommandé
+
+### 1. Préparer son objectif
+
+Choisissez un objectif assez précis pour être suivi. Un bon objectif indique ce que vous cherchez à produire, apprendre ou lancer. Évitez les intitulés trop généraux comme « devenir meilleur ».
+
+### 2. Créer un ARC
+
+Donnez à l'ARC un titre, une description et un objectif. Découpez ensuite l'objectif en jalons observables. Les étapes proposées dans la documentation sont **Idée**, **Prototype**, **Démo**, **Bêta** et **Lancement**.
+
+Les statuts documentés sont :
+
+| Statut   | Utilisation                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| Actif    | Vous travaillez actuellement sur l'ARC.                                  |
+| En pause | Vous interrompez temporairement le travail.                              |
+| Terminé  | L'objectif de l'ARC est atteint.                                         |
+| Archivé  | Vous retirez l'ARC de votre vue active sans nécessairement le supprimer. |
+
+Vérifiez la disponibilité exacte de chaque statut dans l'application déployée. La documentation ne remplace pas le comportement observé dans votre environnement.
+
+### 3. Publier des Traces
+
+Une Trace peut contenir du texte, des images, une vidéo ou une mesure. Pour qu'elle soit utile :
+
+1. indiquez la date ou la période concernée ;
+2. décrivez l'action réalisée ;
+3. ajoutez le résultat obtenu ;
+4. reliez la Trace à l'ARC et au jalon correspondant lorsque cette option existe ;
+5. évitez de présenter une intention comme un résultat ;
+6. ne publiez pas de secret, de mot de passe, de clé API ou de donnée personnelle d'un tiers.
+
+Une Trace autonome peut être utile pour une réflexion ou une activité qui ne correspond pas à un ARC. Les règles de visibilité et de suppression doivent être vérifiées dans l'application, car les pages existantes ne sont pas parfaitement cohérentes sur ce point.
+
+### 4. Suivre la Trajectory
+
+La Trajectory sert à observer l'évolution de vos Traces et de vos ARCs. Les métriques mentionnées dans la documentation comprennent la constance, la série de publication, l'élan, la progression des jalons et des badges.
+
+Ces métriques ne doivent pas être interprétées comme une certification indépendante de la véracité d'un contenu. Elles décrivent les données enregistrées par la plateforme selon ses règles de calcul.
+
+## Feed et découverte
+
+La documentation distingue deux expériences :
+
+- **Abonnements** : les publications des builders suivis, généralement présentées dans l'ordre de publication ;
+- **Découverte** : des contenus ou profils recommandés selon des signaux tels que la récence, l'activité, le domaine et l'engagement.
+
+Les proportions, les seuils d'inactivité et la formule exacte de recommandation mentionnés dans d'autres documents sont des spécifications documentaires. Ils ne sont pas confirmés par le site local de documentation. Ne les utilisez pas comme garantie de classement.
+
+Lorsque vous consultez une Trace, vous pouvez selon l'environnement : l'aimer, la commenter, la partager ou ouvrir le profil de son auteur. Respectez la vie privée et ne manipulez pas artificiellement les interactions.
+
+## Diffusion en direct
+
+Les pages produit décrivent un parcours de diffusion en direct avec un titre, une source vidéo, un chat et éventuellement une rediffusion. Elles décrivent aussi des outils de modération comme la suppression d'un message ou le blocage d'un compte.
+
+La présence effective du live, la durée maximale, l'enregistrement, les notifications et les options de chat doivent être confirmés dans l'application. Le dépôt de documentation seul ne permet pas de garantir ces comportements.
+
+## Messagerie
+
+La messagerie est décrite comme un moyen d'échanger directement avec d'autres builders. Les pages mentionnent le texte, les images, les liens, les demandes de message et le signalement.
+
+Ne partagez jamais un mot de passe, un code de connexion, une clé secrète, un numéro de carte ou une information sensible dans un message. Utilisez le signalement et le blocage lorsque ces commandes sont disponibles dans votre environnement.
+
+## Notifications et PWA
+
+La documentation décrit des notifications intégrées et des notifications push liées notamment aux messages, interactions et lives. Elle décrit également une installation possible comme Progressive Web App.
+
+Ces fonctions dépendent du navigateur, des permissions accordées, d'un service worker et de la configuration du déploiement. Refuser ou retirer la permission empêche les notifications push. L'absence d'une notification ne prouve pas que l'événement n'a pas eu lieu.
+
+## Recherche et recrutement
+
+Les documents recruteur décrivent une recherche par domaine, activité, score de constance, badges, ARCs actifs et étape de projet. L'accès Elite est présenté comme une fonction réservée à des recruteurs autorisés.
+
+Les critères tels que « 60 jours sur 90 », les alertes, la priorité des messages et les délais d'activation sont des règles décrites dans les `.mdx`; ils doivent être confirmés par l'équipe et l'environnement de production avant d'être annoncés à un utilisateur ou à un candidat.
+
+## Monétisation
+
+Les documents d'explication mentionnent des pourboires, abonnements, revenus vidéo, portefeuille et retraits Mobile Money. Ils mentionnent également des plans et des valeurs chiffrées.
+
+Aucun montant, commission, seuil, devise, fournisseur de paiement ou délai de retrait ne doit être considéré comme garanti sur la seule base de cette documentation. Avant toute transaction, vérifiez :
+
+- le plan effectivement proposé dans l'application ;
+- le fournisseur et le pays pris en charge ;
+- les conditions de paiement et de remboursement ;
+- les seuils d'éligibilité ;
+- les frais et commissions ;
+- l'état réel du portefeuille et des retraits.
+
+Ne transmettez jamais de clé secrète dans la documentation, le navigateur ou un message public.
+
+## Compte et sécurité
+
+Utilisez une adresse email contrôlée par vous et un mot de passe unique. Activez uniquement les notifications dont vous avez besoin. Déconnectez les sessions inconnues et révoquez les tokens lorsqu'ils ne sont plus nécessaires.
+
+Pour une demande de suppression, d'accès ou de rectification, utilisez le parcours effectivement proposé par l'application ou contactez le support indiqué par le déploiement. Les délais de suppression, l'âge minimum et la juridiction applicable doivent être confirmés dans les conditions en vigueur.
+
+## API et intégrations
+
+Les pages API décrivent une API REST avec authentification Bearer, réponses JSON, pagination et scopes tels que `read:profile`, `read:traces` et `read:metrics`.
+
+Les exemples d'URL, de réponses et de quotas sont des exemples documentaires tant qu'un environnement API accessible et son contrat publié ne les confirment pas. Avant d'intégrer :
+
+1. demandez l'URL de base officielle ;
+2. obtenez un token limité aux scopes nécessaires ;
+3. vérifiez les codes d'erreur et les limites ;
+4. ne placez jamais le token dans un dépôt public ou du code client ;
+5. prévoyez la révocation et la rotation du token.
+
+## Règles de contenu
+
+Ne publiez pas de contenu illégal, malveillant, discriminatoire, menaçant, trompeur ou portant atteinte aux droits d'un tiers. Ne publiez pas les données personnelles d'une autre personne sans base légitime. Vérifiez les licences des images, vidéos, extraits de code et marques que vous utilisez.
+
+La suppression d'un contenu peut être irréversible. Conservez une copie de travail hors ligne lorsque vous en avez le droit et le besoin.
+
+## Dépannage rapide
+
+- **La page ne se charge pas** : vérifiez l'URL, le serveur local et la connexion réseau.
+- **Le Markdown apparaît brut** : ouvrez le document depuis la navigation de XERA1 ; les fichiers `.md` ouverts directement par un navigateur ne sont pas automatiquement mis en forme.
+- **L'assistant ne répond pas** : le serveur local doit disposer de `GEMINI_API_KEY` ; sans cette variable, la fonction est indisponible.
+- **Les notifications manquent** : contrôlez les permissions du navigateur, le service worker et les paramètres de l'application.
+- **Une API renvoie une erreur** : vérifiez l'URL, le token, le scope, le corps JSON et les limites de débit de l'environnement ciblé.
+
+## Documents de référence
+
+Pour approfondir, consultez les pages **ARCs**, **Traces**, **Trajectory**, **Feed**, **Notifications**, **Messagerie**, **Recherche**, **API**, **Confidentialité**, **Cookies**, **Conditions d'utilisation** et les guides du dossier `Explication/`.
+
+Cette page est la synthèse utilisateur. Les documents techniques, les modèles de menace et les notes historiques peuvent contenir des exemples, des hypothèses ou des informations obsolètes : vérifiez toujours leur date et leur statut avant de les appliquer.

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="icon" href="logo/lolo.png" type="image/png" />
+        <title>Xera 1 | Document</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+            :root {
+                --paper: #160e1b;
+                --panel: #21152a;
+                --ink: #f8effd;
+                --muted: #b9a8c1;
+                --line: #3a2944;
+                --accent: #d176f5;
+                --accent-soft: #382044;
+                --code: #100b14;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                color: var(--ink);
+                background: radial-gradient(
+                    circle at top right,
+                    #382044 0,
+                    var(--paper) 38rem
+                );
+                font:
+                    16px/1.75 "DM Sans",
+                    sans-serif;
+            }
+            .shell {
+                width: min(900px, calc(100% - 40px));
+                margin: 0 auto;
+                padding: 28px 0 80px;
+            }
+            .topbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                margin-bottom: 44px;
+            }
+            .brand,
+            .back {
+                color: var(--ink);
+                text-decoration: none;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font:
+                    800 18px Manrope,
+                    sans-serif;
+            }
+            .mark {
+                width: 32px;
+                height: 32px;
+                object-fit: contain;
+            }
+            .back {
+                color: var(--accent);
+                font-weight: 700;
+            }
+            article {
+                padding: 42px clamp(22px, 5vw, 64px);
+                border: 1px solid var(--line);
+                background: color-mix(in srgb, var(--panel) 94%, transparent);
+                box-shadow: 0 24px 70px #0006;
+            }
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: var(--ink);
+                font-family: Manrope, sans-serif;
+                line-height: 1.2;
+                margin: 1.8em 0 0.7em;
+            }
+            h1 {
+                margin-top: 0;
+                font-size: clamp(30px, 5vw, 48px);
+            }
+            h2 {
+                padding-bottom: 8px;
+                border-bottom: 1px solid var(--line);
+                font-size: 28px;
+            }
+            h3 {
+                font-size: 21px;
+            }
+            p,
+            ul,
+            ol,
+            blockquote,
+            table {
+                margin: 0 0 20px;
+            }
+            a {
+                color: var(--accent);
+            }
+            strong {
+                color: #fff;
+            }
+            blockquote {
+                padding: 12px 18px;
+                border-left: 3px solid var(--accent);
+                color: var(--muted);
+                background: var(--accent-soft);
+            }
+            code {
+                padding: 2px 5px;
+                color: #f0b8ff;
+                background: var(--code);
+                border-radius: 4px;
+                font:
+                    0.9em "JetBrains Mono",
+                    monospace;
+            }
+            pre {
+                overflow: auto;
+                margin: 24px 0;
+                padding: 18px;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                color: #f4e8fa;
+                background: var(--code);
+            }
+            pre code {
+                padding: 0;
+                background: transparent;
+                color: inherit;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                display: block;
+                overflow-x: auto;
+            }
+            th,
+            td {
+                min-width: 120px;
+                padding: 10px 12px;
+                border: 1px solid var(--line);
+                text-align: left;
+            }
+            th {
+                background: var(--accent-soft);
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            .status {
+                color: var(--muted);
+            }
+            @media (max-width: 600px) {
+                .shell {
+                    width: min(100% - 24px, 900px);
+                    padding-top: 16px;
+                }
+                article {
+                    padding: 28px 18px;
+                }
+                .topbar {
+                    margin-bottom: 26px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="shell">
+            <header class="topbar">
+                <a class="brand" href="docs.html"
+                    ><img
+                        class="mark"
+                        src="logo/lolo.png"
+                        alt="Logo Xera 1"
+                    />Xera 1</a
+                >
+                <a class="back" href="docs.html#archives"
+                    >Retour aux documents</a
+                >
+            </header>
+            <main>
+                <article id="document">
+                    <p class="status">Chargement du document...</p>
+                </article>
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script>
+            const target = document.querySelector("#document");
+            const file = new URLSearchParams(location.search).get("file");
+            const allowed =
+                file &&
+                /^(documentation|Explication)\/[\w./-]+\.(md|mdx)$/.test(
+                    file,
+                ) &&
+                !file.includes("..")
+                    ? file
+                    : null;
+            if (!allowed) {
+                target.innerHTML =
+                    '<h1>Document introuvable</h1><p class="status">Le fichier demande n\'est pas valide.</p>';
+            } else {
+                fetch(allowed)
+                    .then((response) => {
+                        if (!response.ok)
+                            throw new Error("Document introuvable");
+                        return response.text();
+                    })
+                    .then((source) => {
+                        marked.setOptions({ breaks: true, gfm: true });
+                        target.innerHTML = marked.parse(
+                            source.replace(/^---[\\s\\S]*?---\\s*/, ""),
+                        );
+                        document.title = `Xera 1 | ${target.querySelector("h1")?.textContent || allowed}`;
+                    })
+                    .catch(() => {
+                        target.innerHTML =
+                            '<h1>Impossible de charger le document</h1><p class="status">Verifie que le serveur local sert bien ce fichier.</p>';
+                    });
+            }
+        </script>
+    </body>
+</html>

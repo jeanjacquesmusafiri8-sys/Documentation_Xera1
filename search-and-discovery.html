@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Search & discovery | XERA1 Docs</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="brand-wrap">
+                    <img src="logo.png" alt="XERA1 logo" class="brand-logo" />
+                    <div>
+                        <div class="brand-name">XERA1</div>
+                        <div class="brand-tag">Docs</div>
+                    </div>
+                </div>
+                <div class="sidebar-search">
+                    <span>⌘K</span>
+                    <input
+                        type="search"
+                        placeholder="Search docs"
+                        aria-label="Rechercher"
+                    />
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Documentation</div>
+                    <a class="nav-item" href="docs.html">Accueil</a>
+                    <a class="nav-item" href="getting-started.html"
+                        >Getting started</a
+                    >
+                    <a class="nav-item" href="pro-pages.html">Pro pages</a>
+                    <a class="nav-item" href="messaging-and-network.html"
+                        >Messaging</a
+                    >
+                    <a class="nav-item active" href="search-and-discovery.html"
+                        >Search & discovery</a
+                    >
+                    <a class="nav-item" href="trust-and-verification.html"
+                        >Trust & verification</a
+                    >
+                </nav>
+            </aside>
+
+            <main class="main-panel">
+                <header class="topbar">
+                    <div class="crumb">
+                        Documentation <span>›</span>
+                        <strong>Search & discovery</strong>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="ghost-button" id="command-k-trigger">
+                            Search docs
+                        </button>
+                    </div>
+                </header>
+
+                <div class="content-wrap">
+                    <article class="doc-article">
+                        <div class="eyebrow">04 / Search & discovery</div>
+                        <h1>Le feed immersif et la recherche contextualisée</h1>
+
+                        <p>
+                            XERA1 combine un feed immersif, une recherche rapide
+                            et un système de découverte orienté vers la qualité
+                            de la preuve. L’objectif est de réduire le bruit et
+                            de mettre en avant les builders qui publient
+                            réellement.
+                        </p>
+
+                        <h2>1. Le feed immersif</h2>
+                        <p>
+                            Le feed immersif donne une expérience de lecture
+                            plus profonde. Les contenus sont plus lisibles, plus
+                            contextuels et plus centrés sur le moment
+                            d’exécution.
+                        </p>
+
+                        <ul>
+                            <li>navigation verticale et immersive,</li>
+                            <li>focus sur la preuve publiée,</li>
+                            <li>
+                                swipe / scroll adapté au contexte d’exploration,
+                            </li>
+                            <li>
+                                fermeture rapide par interaction ou gesture.
+                            </li>
+                        </ul>
+
+                        <div class="note-box">
+                            <strong>Note :</strong> Le feed est conçu pour
+                            valoriser la qualité du contenu et la progression
+                            observable, pas le volume de publication sans
+                            substance.
+                        </div>
+
+                        <h2>2. La command palette</h2>
+                        <p>
+                            La recherche rapide est accessible via la commande
+                            <strong>/search</strong> ou via la combinaison
+                            <strong>⌘K</strong>. Elle permet de retrouver un
+                            contenu actif, un profil, une catégorie ou une
+                            thématique.
+                        </p>
+
+                        <ul>
+                            <li>recherche par catégories,</li>
+                            <li>mots-clés de projets,</li>
+                            <li>tendances du moment,</li>
+                            <li>historique de recherche récent.</li>
+                        </ul>
+
+                        <h2>3. Historique éphémère</h2>
+                        <p>
+                            L’historique de recherche est purgé automatiquement
+                            après 7 jours. Cela permet de garder une
+                            recommandation pertinente sans conserver des traces
+                            trop anciennes.
+                        </p>
+
+                        <div class="callout">
+                            <strong>Tip :</strong> Utilisez des requêtes
+                            précises comme “SaaS”, “open source”, “pitch deck”,
+                            ou le nom d’un domaine pour maximiser la qualité des
+                            résultats.
+                        </div>
+
+                        <h2>4. Découverte</h2>
+                        <p>
+                            Le moteur de découverte met en avant les profils et
+                            contenus les plus cohérents avec vos intérêts, votre
+                            activité et les signaux de progression.
+                        </p>
+
+                        <ul>
+                            <li>contenus récents,</li>
+                            <li>builders actifs et crédibles,</li>
+                            <li>
+                                trajectoires alignées avec vos centres
+                                d’intérêt.
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <div
+            class="search-overlay hidden"
+            id="search-overlay"
+            aria-hidden="true"
+        >
+            <div class="search-panel">
+                <div class="search-input-row">
+                    <span class="search-icon">⌕</span>
+                    <input
+                        type="search"
+                        id="global-search-input"
+                        placeholder="Search the docs"
+                        aria-label="Recherche rapide"
+                    />
+                    <button class="close-search" aria-label="Fermer">×</button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

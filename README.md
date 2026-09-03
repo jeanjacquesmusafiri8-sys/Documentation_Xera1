@@ -20,7 +20,7 @@ La documentation a été nettoyée pour se concentrer sur le vrai fonctionnement
 - `search-and-discovery.html` : feed immersif et commande de recherche.
 - `trust-and-verification.html` : badge, provenance media, sécurité.
 - `styles.css` : design dark mode minimaliste du site.
-- `app.js` : nav, recherche rapide et interactions UI.
+- `docs-app.js` : nav, recherche rapide et interactions UI.
 
 ## Lancer la doc localement
 

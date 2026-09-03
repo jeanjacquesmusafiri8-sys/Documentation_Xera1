@@ -587,9 +587,14 @@ textarea {
     right: 22px;
     bottom: 86px;
     width: min(360px, calc(100vw - 26px));
-    padding: 16px;
+    padding: 0;
     z-index: 45;
     background: rgba(17, 17, 22, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
 }
 
 .assistant-panel.hidden {
@@ -601,7 +606,10 @@ textarea {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 12px;
+    padding: 14px 16px;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.025);
 }
 
 .assistant-title {
@@ -620,7 +628,8 @@ textarea {
 .gemini-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .input-shell {
@@ -674,17 +683,54 @@ textarea {
 }
 
 .gemini-answer {
-    margin-top: 12px;
-    padding: 0.9rem 1rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(124, 58, 237, 0.08);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 330px;
+    min-height: 170px;
+    padding: 16px;
+    overflow-y: auto;
+    background: rgba(5, 5, 8, 0.32);
 }
 
-.gemini-answer.error {
+.chat-bubble {
+    width: fit-content;
+    max-width: 88%;
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.chat-bubble strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.chat-bubble code {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.28);
+    color: #ddd0ff;
+    font-size: 0.82em;
+}
+
+.chat-bubble.assistant {
+    align-self: flex-start;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: #1b1923;
+    color: #e8e5ef;
+}
+
+.chat-bubble.user {
+    align-self: flex-end;
+    border: 1px solid rgba(145, 96, 255, 0.35);
+    background: linear-gradient(135deg, #7138e8, #4f2ca9);
+    color: #ffffff;
+}
+
+.chat-bubble.error {
     border-color: rgba(250, 204, 21, 0.2);
     background: rgba(250, 204, 21, 0.08);
     color: #f5f5f5;

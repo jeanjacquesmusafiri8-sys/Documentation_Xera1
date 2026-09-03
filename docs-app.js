@@ -167,8 +167,45 @@ function updateSendButton() {
 
 function setGeminiStatus(message, isError = false) {
     if (!geminiAnswer) return;
-    geminiAnswer.textContent = message;
+    geminiAnswer.innerHTML = renderAssistantMessage(message);
     geminiAnswer.classList.toggle("error", isError);
+}
+
+function escapeHtml(value) {
+    return value.replace(
+        /[&<>'"]/g,
+        (character) =>
+            ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                "'": "&#39;",
+                '"': "&quot;",
+            })[character],
+    );
+}
+
+function renderAssistantMessage(message) {
+    return escapeHtml(message)
+        .replace(/`([^`\n]+)`/g, "<code>$1</code>")
+        .replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/__([^_\n]+)__/g, "<strong>$1</strong>")
+        .replace(/\*([^*\n]+)\*/g, "<em>$1</em>")
+        .replace(/_([^_\n]+)_/g, "<em>$1</em>")
+        .replace(/\n/g, "<br />");
+}
+
+function addChatMessage(message, role, isError = false) {
+    if (!geminiAnswer) return;
+    const bubble = document.createElement("div");
+    bubble.className = `chat-bubble ${role}${isError ? " error" : ""}`;
+    bubble.innerHTML =
+        role === "assistant"
+            ? renderAssistantMessage(message)
+            : escapeHtml(message);
+    geminiAnswer.appendChild(bubble);
+    geminiAnswer.scrollTop = geminiAnswer.scrollHeight;
+    return bubble;
 }
 
 async function askGemini() {
@@ -180,7 +217,13 @@ async function askGemini() {
         return;
     }
 
-    setGeminiStatus("Connexion à l’assistant en cours...");
+    addChatMessage(question, "user");
+    geminiInput.value = "";
+    updateSendButton();
+    const loadingMessage = addChatMessage(
+        "Connexion à l’assistant en cours...",
+        "assistant",
+    );
     geminiSend.disabled = true;
 
     try {
@@ -195,12 +238,18 @@ async function askGemini() {
             throw new Error(data.error || "Erreur de requête.");
         }
 
-        setGeminiStatus(data.answer || "Aucune réponse trouvée.");
+        if (loadingMessage)
+            loadingMessage.innerHTML = renderAssistantMessage(
+                data.answer || "Aucune réponse trouvée.",
+            );
     } catch (error) {
         const message = error.message.includes("GEMINI_API_KEY")
             ? "La clé GEMINI_API_KEY n’est pas configurée sur le serveur."
             : error.message || "L’assistant est momentanément indisponible.";
-        setGeminiStatus(message, true);
+        if (loadingMessage) {
+            loadingMessage.innerHTML = renderAssistantMessage(message);
+            loadingMessage.classList.add("error");
+        }
     } finally {
         updateSendButton();
     }

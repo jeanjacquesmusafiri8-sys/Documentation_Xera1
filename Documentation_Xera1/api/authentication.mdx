@@ -1,0 +1,90 @@
+---
+title: "Authentification de l'API Xera 1 : tokens et gestion des accès"
+sidebarTitle: "Authentification"
+description: "Générez et gérez vos tokens d'API Xera 1 depuis les Paramètres développeur. Tous les appels API utilisent des tokens Bearer dans l'en-tête Authorization."
+---
+
+L'API Xera 1 utilise des tokens Bearer pour authentifier toutes les requêtes. Chaque token est associé à un compte Xera 1 et hérite de ses permissions. Ce guide explique comment générer, utiliser et révoquer vos tokens API.
+
+## Générer un token API
+
+<Steps>
+  <Step title="Ouvrir les Paramètres développeur">
+    Allez dans **Paramètres → Développeur → Tokens API**.
+  </Step>
+  <Step title="Créer un nouveau token">
+    Cliquez sur **Générer un nouveau token**.
+  </Step>
+  <Step title="Nommer et configurer le token">
+    Donnez un nom descriptif à votre token (ex. : `Dashboard interne` ou `Script d'export`). Sélectionnez les scopes nécessaires (voir ci-dessous).
+  </Step>
+  <Step title="Copier le token">
+    Copiez le token immédiatement et stockez-le dans un gestionnaire de secrets ou une variable d'environnement. **Il ne sera plus affiché après la fermeture de la boîte de dialogue.**
+  </Step>
+</Steps>
+
+<Warning>
+  Ne partagez jamais votre token API dans votre code source ou dans des dépôts publics. Utilisez des variables d'environnement ou un gestionnaire de secrets.
+</Warning>
+
+## Utiliser votre token
+
+Incluez votre token dans l'en-tête `Authorization` de chaque requête :
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_TOKEN" \
+  https://api.xera1.xyz/v1/me
+```
+
+Exemple en JavaScript :
+
+```javascript
+const response = await fetch('https://api.xera1.xyz/v1/me', {
+  headers: {
+    'Authorization': `Bearer ${process.env.XERA1_API_TOKEN}`,
+    'Content-Type': 'application/json'
+  }
+});
+const data = await response.json();
+```
+
+Exemple en Python :
+
+```python
+import requests
+import os
+
+headers = {
+    'Authorization': f'Bearer {os.environ["XERA1_API_TOKEN"]}',
+    'Content-Type': 'application/json'
+}
+response = requests.get('https://api.xera1.xyz/v1/me', headers=headers)
+data = response.json()
+```
+
+## Scopes de token
+
+| Scope | Description |
+| --- | --- |
+| `read:profile` | Lire les informations de profil public |
+| `read:traces` | Lire les Traces publiées |
+| `read:arcs` | Lire les ARCs |
+| `read:metrics` | Lire les métriques de Trajectory |
+| `write:traces` | Publier des Traces |
+| `write:interactions` | Créer des j'aime et commentaires |
+
+## Gérer vos tokens
+
+Depuis **Paramètres → Développeur → Tokens API**, vous pouvez voir tous vos tokens actifs, leur date de création et leur dernière utilisation.
+
+### Révoquer un token
+
+Pour révoquer un token, cliquez sur l'icône **Supprimer** à côté du token concerné. La révocation est immédiate : toute requête utilisant ce token reçoit une réponse `401 Unauthorized`.
+
+## Erreurs d'authentification
+
+| Code | Message | Cause probable |
+| --- | --- | --- |
+| `401 UNAUTHORIZED` | Token manquant ou invalide | Le token n'est pas dans l'en-tête ou est mal formaté |
+| `401 TOKEN_EXPIRED` | Token expiré | Le token a été révoqué ou a expiré |
+| `403 INSUFFICIENT_SCOPE` | Scope insuffisant | Le token ne dispose pas du scope requis pour cet endpoint |

@@ -1,0 +1,85 @@
+{
+  "note": "This file was part of the Mintlify starter. Mintlify has been removed and this file was intentionally neutralized to avoid further use. Original content is preserved in the repository history if needed.",
+  "colors": {
+    "primary": "#A92FDF",
+    "light": "#D176F5",
+    "dark": "#7119B8"
+  },
+  "logo": {
+    "light": "/logo/xera-rocket.png",
+    "dark": "/logo/xera-rocket.png"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Démarrage",
+            "pages": [
+              "index",
+              "quickstart",
+              "account-setup"
+            ]
+          },
+          {
+            "group": "Concepts clés",
+            "pages": [
+              "concepts/arcs",
+              "concepts/traces",
+              "concepts/trajectory"
+            ]
+          },
+          {
+            "group": "Fonctionnalités",
+            "pages": [
+              "features/feed",
+              "features/live-streaming",
+              "features/messaging",
+              "features/notifications",
+              "features/search"
+            ]
+          },
+          {
+            "group": "Recruteurs",
+            "pages": [
+              "recruiters/elite-access",
+              "recruiters/talent-search"
+            ]
+          },
+          {
+            "group": "Aide",
+            "pages": [
+              "help/faq",
+              "help/troubleshooting"
+            ]
+          },
+          {
+            "group": "Légal",
+            "pages": [
+              "legal/terms",
+              "legal/privacy",
+              "legal/cookies"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API",
+            "pages": [
+              "api/overview",
+              "api/authentication",
+              "api/feed",
+              "api/interactions",
+              "api/content-metrics"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

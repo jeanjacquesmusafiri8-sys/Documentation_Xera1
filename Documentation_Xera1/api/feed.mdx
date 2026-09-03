@@ -1,0 +1,174 @@
+---
+title: "API Feed Xera 1 : récupérer les Traces et le contenu du fil"
+sidebarTitle: "Feed"
+description: "Utilisez l'endpoint /feed de l'API Xera 1 pour récupérer les Traces du fil de découverte, les publications des abonnements et les dernières Traces d'un profil donné."
+---
+
+L'API Feed vous permet de récupérer les Traces publiées sur Xera 1 depuis le fil de découverte, les abonnements d'un compte, ou le profil d'un builder spécifique. Ces endpoints sont idéaux pour intégrer le contenu Xera 1 dans vos dashboards, outils d'analyse ou applications tierces.
+
+## GET /feed/discover
+
+Retourne les Traces du fil de découverte, triées par algorithme de pertinence.
+
+```bash
+GET https://api.xera1.xyz/v1/feed/discover
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+### Paramètres de requête
+
+<ParamField query="limit" default="20" type="integer">
+  Nombre de Traces à retourner (max 50).
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Curseur de pagination pour la page suivante.
+</ParamField>
+
+<ParamField query="domain" type="string">
+  Filtrer par domaine d'activité : `developer`, `creator`, `entrepreneur`, `student`, `other`.
+</ParamField>
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "trace_abc123",
+      "content": "Correction du bug de cache Redis. Le temps de réponse de l'API est passé de 450ms à 35ms.",
+      "publishedAt": "2025-01-15T14:30:00Z",
+      "author": {
+        "id": "user_xyz789",
+        "username": "alikonadiop",
+        "displayName": "Ali Konadiop",
+        "avatarUrl": "https://cdn.xera1.xyz/avatars/alikonadiop.jpg",
+        "verifiedBuilder": true
+      },
+      "arc": {
+        "id": "arc_def456",
+        "title": "Construire un SaaS B2B en 90 jours"
+      },
+      "metrics": {
+        "likes": 47,
+        "comments": 12
+      },
+      "mediaUrls": [
+        "https://cdn.xera1.xyz/media/trace_abc123_screenshot.png"
+      ]
+    }
+  ],
+  "pagination": {
+    "cursor": "cursor_next_abc",
+    "hasMore": true
+  }
+}
+```
+
+---
+
+## GET /feed/following
+
+Retourne les Traces des builders suivis par l'utilisateur authentifié, en ordre chronologique inverse.
+
+```bash
+GET https://api.xera1.xyz/v1/feed/following
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `read:traces`
+
+### Paramètres de requête
+
+<ParamField query="limit" default="20" type="integer">
+  Nombre de Traces à retourner (max 50).
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Curseur de pagination.
+</ParamField>
+
+---
+
+## GET /profiles/{username}/traces
+
+Retourne les Traces publiées par un builder spécifique.
+
+```bash
+GET https://api.xera1.xyz/v1/profiles/{username}/traces
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+### Paramètres de chemin
+
+<ParamField path="username" type="string" required>
+  Le nom d'utilisateur du builder (sans `@`).
+</ParamField>
+
+### Paramètres de requête
+
+<ParamField query="limit" default="20" type="integer">
+  Nombre de Traces à retourner (max 50).
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Curseur de pagination.
+</ParamField>
+
+<ParamField query="arc_id" type="string">
+  Filtrer les Traces d'un ARC spécifique.
+</ParamField>
+
+---
+
+## POST /traces
+
+Publie une nouvelle Trace au nom de l'utilisateur authentifié.
+
+```bash
+POST https://api.xera1.xyz/v1/traces
+Authorization: Bearer YOUR_API_TOKEN
+Content-Type: application/json
+```
+
+**Scope requis** : `write:traces`
+
+### Corps de la requête
+
+<ParamField body="content" type="string" required>
+  Le texte de la Trace (max 1 000 caractères).
+</ParamField>
+
+<ParamField body="arcId" type="string">
+  L'ID de l'ARC auquel cette Trace est liée.
+</ParamField>
+
+<ParamField body="progressPercent" type="integer">
+  Pourcentage de progression du jalon associé (0 à 100).
+</ParamField>
+
+### Exemple
+
+```json
+{
+  "content": "Implémentation du système de retry avec backoff exponentiel. Testé sur 500 requêtes simulées.",
+  "arcId": "arc_def456",
+  "progressPercent": 65
+}
+```
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "trace_new789",
+    "content": "Implémentation du système de retry avec backoff exponentiel. Testé sur 500 requêtes simulées.",
+    "publishedAt": "2025-01-15T16:45:00Z",
+    "arcId": "arc_def456",
+    "progressPercent": 65
+  }
+}
+```

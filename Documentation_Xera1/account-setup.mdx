@@ -1,0 +1,108 @@
+---
+title: "Configurer votre compte Xera 1 : profil, sécurité et notifications"
+sidebarTitle: "Compte"
+description: "Configurez votre profil Xera 1, définissez vos préférences de notification et sécurisez votre compte depuis un écran de Paramètres central."
+---
+
+Votre compte Xera est plus qu'une simple connexion : c'est le fondement de votre Trajectory publique. Ce guide vous accompagne à travers tous les Paramètres disponibles dans votre compte : façonner votre identité de profil, contrôler la façon dont Xera vous notifie, et sécuriser vos identifiants.
+
+## Paramètres du profil
+
+Votre profil est la première chose que les autres builders voient lorsqu'ils visitent votre page Trajectory. Gardez-le à jour pour attirer des abonnés, des collaborateurs et des opportunités.
+
+Pour modifier votre profil, appuyez sur votre **avatar** dans la barre de navigation et sélectionnez **Paramètres → Profil**.
+
+<ParamField body="Nom d'utilisateur" type="string" required>
+  Votre identifiant unique sur Xera. Il apparaît dans votre URL publique (`xera1.xyz/@username`) et ne peut pas contenir d'espaces. Vous pouvez le changer à tout moment, mais cela rompra les liens existants vers votre profil.
+</ParamField>
+
+<ParamField body="Nom affiché" type="string" required>
+  Le nom affiché sur votre carte de profil et dans le feed. Utilisez votre vrai nom ou le nom sous lequel vous construisez.
+</ParamField>
+
+<ParamField body="Bio" type="string">
+  Une courte description de qui vous êtes et de ce que vous construisez. Soyez spécifique : "Je construis une app fintech pour freelances" est plus convaincant que "Entrepreneur".
+</ParamField>
+
+<ParamField body="Avatar" type="file">
+  Téléchargez une image carrée (JPEG ou PNG recommandé). Votre avatar apparaît à côté de chaque Trace que vous publiez, dans le feed et lors des diffusions en direct.
+</ParamField>
+
+<ParamField body="Domaine d'activité" type="enum">
+  Sélectionnez la catégorie qui décrit le mieux votre travail. Cela influence la façon dont l'algorithme de découverte met en avant votre profil auprès des audiences pertinentes.
+
+  Valeurs acceptées : `Developer`, `Creator`, `Entrepreneur`, `Student`, `Other`
+</ParamField>
+
+Appuyez sur **Enregistrer les modifications** après avoir mis à jour un champ. Les changements sont reflétés immédiatement sur toute la plateforme.
+
+---
+
+## Préférences de notification
+
+Xera envoie des notifications push directement à votre navigateur ou à votre PWA installée pour que vous ne manquiez jamais une interaction significative. Pour gérer ce qui déclenche une notification, allez dans **Paramètres → Notifications**.
+
+<Accordion title="Nouveaux abonnés">
+  Recevez une notification chaque fois que quelqu'un suit votre Trajectory. Être conscient de vos nouveaux abonnés vous aide à engager tôt : l'engagement précoce signale la qualité à l'algorithme du feed.
+</Accordion>
+
+<Accordion title="J'aime sur les Traces">
+  Soyez notifié lorsqu'un autre builder aime l'une de vos Traces. Vous pouvez activer ou désactiver cela par type de Trace (texte, image, vidéo) si vous souhaitez réduire le bruit.
+</Accordion>
+
+<Accordion title="Alertes de diffusion en direct">
+  Soyez notifié lorsqu'un builder que vous suivez passe en direct. Vous pouvez limiter ces alertes à vos comptes suivis principaux pour éviter les interruptions.
+</Accordion>
+
+Pour activer les notifications push du navigateur pour la première fois, Xera vous demandera l'autorisation. Cliquez sur **Autoriser** dans la boîte de dialogue du navigateur qui apparaît. Si vous avez précédemment refusé l'autorisation, allez dans les Paramètres de site de votre navigateur pour `xera1.xyz` et réinitialisez l'autorisation de notification, puis rechargez la page.
+
+<Tip>
+  Installez Xera comme PWA pour la livraison de notifications la plus fiable. Ouvrez [xera1.xyz](https://xera1.xyz) dans Chrome ou Safari, appuyez sur le menu du navigateur et sélectionnez **"Ajouter à l'écran d'accueil"** ou **"Installer l'application"**. Les notifications arrivent même lorsque votre onglet de navigateur est fermé.
+</Tip>
+
+---
+
+## Sécurité du compte
+
+Sécuriser votre compte protège votre Trajectory, vos gains et la confiance de vos abonnés.
+
+### Changer votre adresse email
+
+1. Allez dans **Paramètres → Compte → Email**.
+2. Saisissez votre nouvelle adresse email et confirmez-la.
+3. Xera envoie un lien de vérification à la nouvelle adresse.
+4. Cliquez sur le lien dans l'email pour confirmer le changement.
+
+Votre ancienne adresse est immédiatement invalidée une fois que vous avez confirmé.
+
+### Changer votre mot de passe
+
+1. Allez dans **Paramètres → Compte → Mot de passe**.
+2. Saisissez votre mot de passe actuel, puis votre nouveau mot de passe deux fois.
+3. Cliquez sur **Mettre à jour le mot de passe**.
+
+Choisissez un mot de passe d'au moins 12 caractères et unique à Xera.
+
+### Déconnexion de tous les appareils
+
+Si vous pensez que votre compte a été accédé sans votre permission, utilisez l'option **Déconnexion de toutes les sessions** :
+
+1. Allez dans **Paramètres → Compte → Sécurité**.
+2. Cliquez sur **Déconnexion de tous les appareils**.
+3. Confirmez l'action.
+
+Toutes les sessions actives, y compris tout appareil sur lequel vous êtes actuellement connecté, sont immédiatement invalidées. Vous devrez vous reconnecter sur chaque appareil.
+
+<Warning>
+  La déconnexion de tous les appareils met également fin à toute diffusion en direct que vous êtes en train de lancer. Assurez-vous de ne pas être en direct avant d'utiliser cette option.
+</Warning>
+
+---
+
+## Prochaines étapes
+
+<CardGroup cols={2}>
+  <Card title="Démarrage rapide" icon="rocket" href="/quickstart">
+    Pas encore configuré ? Suivez le guide étape par étape pour créer votre ARC et enregistrer votre première Trace.
+  </Card>
+</CardGroup>

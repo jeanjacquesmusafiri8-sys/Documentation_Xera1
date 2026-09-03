@@ -1,0 +1,110 @@
+---
+title: "Vue d'ensemble de l'API Xera 1 : REST, authentification et limites de débit"
+sidebarTitle: "Vue d'ensemble"
+description: "L'API REST de Xera 1 vous permet d'accéder aux profils de builders, aux ARCs, aux Traces et aux métriques de Trajectory depuis vos propres outils et intégrations."
+---
+
+L'API REST de Xera 1 permet aux développeurs d'intégrer les données de la plateforme dans leurs propres outils, dashboards et workflows. Lisez les profils de builders, récupérez les Traces publiées, accédez aux métriques de Trajectory et publiez des Traces au nom de vos utilisateurs.
+
+## URL de base
+
+```text
+https://api.xera1.xyz/v1
+```
+
+Toutes les requêtes doivent être faites avec HTTPS. Les requêtes HTTP sont redirigées vers HTTPS.
+
+## Format de réponse
+
+L'API retourne toujours du JSON. Chaque réponse inclut :
+
+```json
+{
+  "success": true,
+  "data": { ... },
+  "meta": {
+    "requestId": "req_abc123",
+    "timestamp": "2025-01-15T10:30:00Z"
+  }
+}
+```
+
+En cas d'erreur :
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Token d'API invalide ou expiré"
+  }
+}
+```
+
+## Authentification
+
+Toutes les requêtes à l'API nécessitent un token Bearer dans l'en-tête `Authorization`. Consultez la page [Authentification](/api/authentication) pour obtenir et gérer vos tokens.
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_TOKEN" \
+  https://api.xera1.xyz/v1/me
+```
+
+## Limites de débit
+
+| Plan | Requêtes par minute | Requêtes par jour |
+| --- | --- | --- |
+| Standard | 60 | 10 000 |
+| Elite | 300 | 100 000 |
+
+Quand vous dépassez la limite, l'API retourne HTTP `429 Too Many Requests` avec l'en-tête `Retry-After` indiquant le nombre de secondes à attendre.
+
+## Pagination
+
+Les endpoints qui retournent des listes sont paginés avec des curseurs :
+
+```json
+{
+  "success": true,
+  "data": [...],
+  "pagination": {
+    "cursor": "cursor_xyz789",
+    "hasMore": true
+  }
+}
+```
+
+Passez le curseur dans le paramètre `cursor` de votre prochaine requête pour récupérer la page suivante.
+
+## Codes de statut HTTP
+
+| Code | Signification |
+| --- | --- |
+| `200 OK` | Requête réussie |
+| `201 Created` | Ressource créée avec succès |
+| `400 Bad Request` | Paramètres manquants ou invalides |
+| `401 Unauthorized` | Token manquant ou invalide |
+| `403 Forbidden` | Accès refusé pour cette ressource |
+| `404 Not Found` | Ressource introuvable |
+| `429 Too Many Requests` | Limite de débit atteinte |
+| `500 Internal Server Error` | Erreur interne |
+
+## Endpoints disponibles
+
+<CardGroup cols={2}>
+  <Card title="Authentification" icon="key" href="/api/authentication">
+    Obtenir et gérer vos tokens API
+  </Card>
+
+  <Card title="Feed" icon="rss" href="/api/feed">
+    Récupérer les Traces du feed de découverte
+  </Card>
+
+  <Card title="Interactions" icon="heart" href="/api/interactions">
+    Lire et écrire des j'aime et commentaires
+  </Card>
+
+  <Card title="Métriques de contenu" icon="chart-bar" href="/api/content-metrics">
+    Accéder aux métriques de Trajectory et de constance
+  </Card>
+</CardGroup>

@@ -1,0 +1,105 @@
+---
+title: "Dépannage Xera 1 : résoudre les problèmes courants"
+sidebarTitle: "Dépannage"
+description: "Résolvez les problèmes courants sur Xera 1 : connexion, notifications push, diffusion en direct, téléchargements de médias et performances de l'application."
+---
+
+Ce guide couvre les problèmes les plus fréquents rencontrés sur Xera 1 et leurs solutions. Si vous ne trouvez pas de réponse ici, contactez le support via le chat sur [xera1.xyz](https://xera1.xyz).
+
+## Problèmes de connexion
+
+<Accordion title="Je ne reçois pas l'email de vérification">
+  1. Vérifiez votre dossier spam ou courrier indésirable.
+  2. Assurez-vous que l'adresse email saisie est correcte.
+  3. Attendez 5 minutes : les emails peuvent être légèrement retardés.
+  4. Si le problème persiste, cliquez sur **Renvoyer l'email de vérification** sur l'écran de connexion.
+</Accordion>
+
+<Accordion title="Impossible de me connecter avec Google ou GitHub">
+  Assurez-vous que les fenêtres popup ne sont pas bloquées dans votre navigateur pour `xera1.xyz`. Si vous utilisez Safari, désactivez temporairement les bloqueurs de contenu et réessayez.
+</Accordion>
+
+<Accordion title="Mon mot de passe réinitialisé ne fonctionne pas">
+  Le lien de réinitialisation du mot de passe expire après 30 minutes. Si vous avez cliqué après l'expiration, revenez sur l'écran de connexion et recommencez la procédure.
+</Accordion>
+
+---
+
+## Notifications push
+
+<Accordion title="Je ne reçois pas de notifications push">
+  1. Vérifiez que vous avez autorisé les notifications pour `xera1.xyz` dans les paramètres de votre navigateur.
+  2. Si vous utilisez Xera 1 comme PWA installée, vérifiez les paramètres de notification de votre système (iOS : Réglages → Xera 1 → Notifications).
+  3. Déconnectez-vous et reconnectez-vous pour réinitialiser l'abonnement aux notifications.
+</Accordion>
+
+<Accordion title="Je reçois des notifications en double">
+  Cela se produit si vous êtes connecté à Xera 1 à la fois dans le navigateur et comme PWA installée. Déconnectez-vous de l'une des deux sessions.
+</Accordion>
+
+---
+
+## Téléchargements de médias
+
+<Accordion title="Mon image ne se télécharge pas">
+  - Vérifiez que le fichier est en JPEG, PNG ou WebP
+  - La taille maximale est de 10 Mo par image
+  - Assurez-vous que votre connexion internet est stable pendant le téléchargement
+</Accordion>
+
+<Accordion title="Ma vidéo est rejetée lors du téléchargement">
+  - Formats acceptés : MP4, WebM, MOV
+  - Taille maximale : 500 Mo par vidéo
+  - Durée maximale : 3 minutes pour les Traces, sans limite pour les lives
+</Accordion>
+
+---
+
+## Diffusion en direct
+
+<Accordion title="Mon live coupe fréquemment">
+  Une connexion instable est la cause la plus fréquente. Essayez :
+
+  1. Passez en connexion filaire (Ethernet) si possible
+  2. Fermez toutes les autres applications qui utilisent la bande passante
+  3. Si vous êtes sur mobile, passez en 4G/5G ou rapprochez-vous du routeur Wi-Fi
+</Accordion>
+
+<Accordion title="Le chat ne se charge pas pendant mon live">
+  1. Rechargez la page du chat (appuyez sur l'icône de rafraîchissement dans l'overlay)
+  2. Si le problème persiste, terminez le live et relancez-en un nouveau
+</Accordion>
+
+<Accordion title="Mes abonnés ne voient pas que je suis en direct">
+  Les notifications live sont envoyées uniquement si vos abonnés ont autorisé les notifications push pour Xera 1. Rappellez-leur de vérifier leurs paramètres de notification.
+</Accordion>
+
+---
+
+## Performance de l'application
+
+<Accordion title="L'application est lente ou bloquée">
+  1. Videz le cache de votre navigateur pour `xera1.xyz`
+  2. Si vous utilisez la PWA, désinstallez-la et réinstallez-la depuis [xera1.xyz](https://xera1.xyz)
+  3. Désactivez les extensions de navigateur qui pourraient interférer
+</Accordion>
+
+<Accordion title="Le feed ne se met pas à jour">
+  Tirez vers le bas sur le feed pour forcer un rafraîchissement. Si de nouvelles Traces n'apparaissent toujours pas après 30 secondes, vérifiez votre connexion internet.
+</Accordion>
+
+---
+
+## Contacter le support
+
+Si vous n'avez pas trouvé de solution ici :
+
+<CardGroup cols={2}>
+  <Card title="Chat de support" icon="chat" href="https://xera1.xyz">
+    Contactez notre équipe directement depuis xera1.xyz via le chat en bas à droite.
+  </Card>
+
+  <Card title="FAQ complète" icon="help" href="/help/faq">
+    Consultez la FAQ pour des réponses aux questions fréquentes.
+  </Card>
+</CardGroup>

@@ -1,0 +1,152 @@
+---
+title: "API Métriques Xera 1 : accéder aux scores de Trajectory et de constance"
+sidebarTitle: "Métriques"
+description: "Récupérez les métriques de Trajectory, les scores de constance et les statistiques d'ARCs via l'API Xera 1 pour vos dashboards et analyses personnalisées."
+---
+
+Les endpoints de métriques de l'API Xera 1 vous donnent accès aux données quantitatives de la plateforme : scores de constance, élan de Trajectory, statistiques d'ARCs et métriques d'engagement. Idéaux pour construire des tableaux de bord personnalisés ou analyser la progression de vos builders.
+
+## GET /profiles/{username}/metrics
+
+Retourne les métriques de Trajectory complètes d'un builder.
+
+```bash
+GET https://api.xera1.xyz/v1/profiles/{username}/metrics
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `read:metrics`
+
+### Paramètres de chemin
+
+<ParamField path="username" type="string" required>
+  Le nom d'utilisateur du builder (sans `@`).
+</ParamField>
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "username": "alikonadiop",
+    "consistencyScore": {
+      "score30Days": 87,
+      "score7Days": 100,
+      "currentStreak": 23,
+      "longestStreak": 41
+    },
+    "momentum": {
+      "trend": "accelerating",
+      "changeVs14Days": 15
+    },
+    "arcs": {
+      "active": 2,
+      "completed": 5,
+      "paused": 1
+    },
+    "traces": {
+      "total": 187,
+      "last30Days": 26
+    },
+    "badges": [
+      "streak_7",
+      "streak_30",
+      "completionist",
+      "verified_builder"
+    ]
+  }
+}
+```
+
+### Champs de réponse
+
+<ResponseField name="consistencyScore.score30Days" type="integer">
+  Score de constance global sur les 30 derniers jours (0 à 100).
+</ResponseField>
+
+<ResponseField name="consistencyScore.currentStreak" type="integer">
+  Nombre de jours consécutifs actuels avec au moins une Trace publiée.
+</ResponseField>
+
+<ResponseField name="momentum.trend" type="string">
+  Direction de l'élan actuel : `accelerating`, `stable`, ou `decelerating`.
+</ResponseField>
+
+<ResponseField name="momentum.changeVs14Days" type="integer">
+  Variation en pourcentage du nombre de Traces publiées par rapport aux 14 jours précédents.
+</ResponseField>
+
+<ResponseField name="badges" type="array">
+  Liste des badges de constance obtenus par le builder.
+</ResponseField>
+
+---
+
+## GET /profiles/{username}/arcs/{arcId}/metrics
+
+Retourne les métriques détaillées d'un ARC spécifique.
+
+```bash
+GET https://api.xera1.xyz/v1/profiles/{username}/arcs/{arcId}/metrics
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `read:metrics`
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "arcId": "arc_def456",
+    "title": "Construire un SaaS B2B en 90 jours",
+    "stage": "beta",
+    "status": "active",
+    "progressPercent": 68,
+    "milestones": {
+      "total": 8,
+      "completed": 5
+    },
+    "traces": {
+      "total": 47,
+      "last30Days": 12
+    },
+    "engagement": {
+      "totalLikes": 234,
+      "totalComments": 67
+    },
+    "startedAt": "2024-10-15T00:00:00Z"
+  }
+}
+```
+
+---
+
+## GET /me/metrics
+
+Retourne les métriques de l'utilisateur authentifié.
+
+```bash
+GET https://api.xera1.xyz/v1/me/metrics
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `read:metrics`
+
+La structure de la réponse est identique à `GET /profiles/{username}/metrics`, mais retourne les données de l'utilisateur dont le token a été fourni.
+
+---
+
+## Périodes de données disponibles
+
+Pour les endpoints qui retournent des métriques historiques, utilisez le paramètre `period` :
+
+<ParamField query="period" default="30d" type="string">
+  Période couverte par les métriques. Valeurs acceptées : `7d`, `30d`, `90d`, `all`.
+</ParamField>
+
+<Note>
+  Les métriques sont mises à jour toutes les heures. Les scores affichés dans l'API peuvent différer légèrement de l'interface Xera 1 si une Trace vient d'être publiée.
+</Note>

@@ -1,0 +1,200 @@
+---
+title: "API Interactions Xera 1 : j'aime, commentaires et engagement"
+sidebarTitle: "Interactions"
+description: "Gérez les interactions sur les Traces Xera 1 via l'API : récupérer les j'aime et commentaires, ajouter une réaction, et supprimer une interaction existante."
+---
+
+Les endpoints d'interactions de l'API Xera 1 vous permettent de lire et d'écrire des j'aime et des commentaires sur les Traces. Ces endpoints sont utiles pour les tableaux de bord analytiques, les outils de modération ou les applications qui engagent la communauté Xera 1 de manière programmatique.
+
+## GET /traces/{id}/likes
+
+Retourne la liste des j'aime pour une Trace donnée.
+
+```bash
+GET https://api.xera1.xyz/v1/traces/{id}/likes
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+### Paramètres de chemin
+
+<ParamField path="id" type="string" required>
+  L'ID de la Trace.
+</ParamField>
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "count": 42,
+    "likedByCurrentUser": false,
+    "recentLikers": [
+      {
+        "id": "user_abc",
+        "username": "mariamdiallo",
+        "displayName": "Mariam Diallo",
+        "avatarUrl": "https://cdn.xera1.xyz/avatars/mariamdiallo.jpg"
+      }
+    ]
+  }
+}
+```
+
+---
+
+## POST /traces/{id}/like
+
+Ajoute un j'aime au nom de l'utilisateur authentifié.
+
+```bash
+POST https://api.xera1.xyz/v1/traces/{id}/like
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `write:interactions`
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "liked": true,
+    "totalLikes": 43
+  }
+}
+```
+
+---
+
+## DELETE /traces/{id}/like
+
+Retire un j'aime existant.
+
+```bash
+DELETE https://api.xera1.xyz/v1/traces/{id}/like
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `write:interactions`
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "liked": false,
+    "totalLikes": 42
+  }
+}
+```
+
+---
+
+## GET /traces/{id}/comments
+
+Retourne les commentaires d'une Trace, triés du plus récent au plus ancien.
+
+```bash
+GET https://api.xera1.xyz/v1/traces/{id}/comments
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+### Paramètres de requête
+
+<ParamField query="limit" default="20" type="integer">
+  Nombre de commentaires à retourner (max 50).
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Curseur de pagination.
+</ParamField>
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "comment_xyz123",
+      "content": "Excellent travail sur l'optimisation du cache. Quelle librairie Redis tu utilises ?",
+      "publishedAt": "2025-01-15T15:00:00Z",
+      "author": {
+        "id": "user_def",
+        "username": "ousseynou",
+        "displayName": "Ousseynou Ndiaye"
+      },
+      "likes": 3
+    }
+  ],
+  "pagination": {
+    "cursor": "cursor_comments_next",
+    "hasMore": false
+  }
+}
+```
+
+---
+
+## POST /traces/{id}/comments
+
+Publie un commentaire sur une Trace.
+
+```bash
+POST https://api.xera1.xyz/v1/traces/{id}/comments
+Authorization: Bearer YOUR_API_TOKEN
+Content-Type: application/json
+```
+
+**Scope requis** : `write:interactions`
+
+### Corps de la requête
+
+<ParamField body="content" type="string" required>
+  Le texte du commentaire (max 500 caractères).
+</ParamField>
+
+### Exemple
+
+```json
+{
+  "content": "Beau travail ! J'ai eu le même problème de performance. Je recommande `ioredis` pour la gestion des connexions."
+}
+```
+
+### Réponse
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "comment_new456",
+    "content": "Beau travail ! J'ai eu le même problème de performance. Je recommande `ioredis` pour la gestion des connexions.",
+    "publishedAt": "2025-01-15T16:50:00Z"
+  }
+}
+```
+
+---
+
+## DELETE /comments/{id}
+
+Supprime un commentaire appartenant à l'utilisateur authentifié.
+
+```bash
+DELETE https://api.xera1.xyz/v1/comments/{id}
+Authorization: Bearer YOUR_API_TOKEN
+```
+
+**Scope requis** : `write:interactions`
+
+### Réponse
+
+```json
+{
+  "success": true
+}
+```

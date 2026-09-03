@@ -332,7 +332,7 @@ npm install
 | `npm run start`                      | Lance `server/optimized-server.js`               |
 | `npm run dev`                        | Alias du serveur optimisé dans l'état actuel     |
 | `npm run api`                        | Lance `server/monetization-server.js`            |
-| `node Documentation_Xera1/server.js` | Lance le site documentaire local                 |
+| `node Documentation_Xera1/local-server.js` | Lance le site documentaire local                 |
 
 ### Variables principales
 

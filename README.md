@@ -29,7 +29,7 @@ Depuis la racine du projet, après avoir configuré la clé Gemini dans l'enviro
 ```bash
 cp .env.example .env
 # Renseignez GEMINI_API_KEY dans .env, puis lancez :
-node server.js
+node local-server.js
 ```
 
 Puis ouvrez :

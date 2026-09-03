@@ -1,11 +1,7 @@
 {
     "functions": {
         "api/ask.js": {
-            "runtime": "nodejs20.x",
             "includeFiles": "**/*.{md,mdx}"
-        },
-        "api/health.js": {
-            "runtime": "nodejs20.x"
         }
     }
 }

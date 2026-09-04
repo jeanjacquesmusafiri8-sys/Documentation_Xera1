@@ -50,6 +50,48 @@ const geminiInput = document.getElementById("gemini-question");
 const geminiAnswer = document.getElementById("gemini-answer");
 const geminiSend = document.getElementById("gemini-send");
 
+const mobileMenuToggle = document.createElement("button");
+mobileMenuToggle.type = "button";
+mobileMenuToggle.className = "mobile-menu-toggle";
+mobileMenuToggle.setAttribute("aria-label", "Ouvrir le menu de documentation");
+mobileMenuToggle.setAttribute("aria-expanded", "false");
+mobileMenuToggle.textContent = "☰";
+
+const sidebar = document.querySelector(".sidebar");
+const topbarActions = document.querySelector(".topbar-actions");
+
+function setMobileMenu(open) {
+    if (!sidebar) return;
+    sidebar.classList.toggle("mobile-open", open);
+    mobileMenuToggle.setAttribute("aria-expanded", String(open));
+    mobileMenuToggle.setAttribute(
+        "aria-label",
+        open
+            ? "Fermer le menu de documentation"
+            : "Ouvrir le menu de documentation",
+    );
+}
+
+if (sidebar && topbarActions) {
+    const navigation = sidebar.querySelector(".sidebar-nav");
+    docs.forEach((doc) => {
+        if (!navigation || navigation.querySelector(`a[href="${doc.path}"]`))
+            return;
+        const link = document.createElement("a");
+        link.className = "nav-item";
+        link.href = doc.path;
+        link.textContent = doc.title;
+        navigation.appendChild(link);
+    });
+    topbarActions.prepend(mobileMenuToggle);
+    mobileMenuToggle.addEventListener("click", () => {
+        setMobileMenu(!sidebar.classList.contains("mobile-open"));
+    });
+    sidebar.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", () => setMobileMenu(false));
+    });
+}
+
 function openSearch() {
     if (!overlay) return;
     overlay.classList.remove("hidden");
@@ -277,6 +319,7 @@ window.addEventListener("keydown", (event) => {
         if (overlay && !overlay.classList.contains("hidden")) closeSearch();
         if (assistantPanel && !assistantPanel.classList.contains("hidden"))
             closeAssistant();
+        setMobileMenu(false);
     }
 });
 

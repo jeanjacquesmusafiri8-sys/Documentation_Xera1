@@ -1,7 +1,7 @@
 {
     "functions": {
         "api/ask.js": {
-            "includeFiles": "**/*.{md,mdx}"
+            "includeFiles": "**/*.{md,mdx,html}"
         }
     }
 }

@@ -173,6 +173,20 @@ textarea {
     gap: 12px;
 }
 
+.mobile-menu-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
 .ghost-button,
 .primary-btn,
 .secondary-btn {
@@ -740,15 +754,70 @@ textarea {
     .app-shell {
         grid-template-columns: 1fr;
     }
+
     .sidebar {
-        position: relative;
-        height: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 30;
+        width: min(320px, 42vw);
+        height: 100vh;
+        border-right: 1px solid var(--line);
+        border-bottom: 0;
+        transform: translateX(-105%);
+        transition: transform 0.22s ease;
+        overflow-y: auto;
     }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-toggle {
+        display: inline-grid;
+        place-items: center;
+    }
+
     .three-up,
     .card-grid,
     .feature-columns {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 721px) and (max-width: 980px) {
+    .topbar {
+        padding: 16px 24px;
+    }
+
+    .content-wrap {
+        width: min(900px, calc(100% - 48px));
+    }
+
+    .three-up,
+    .card-grid,
+    .feature-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .topbar {
+        padding: 14px 16px;
+    }
+
+    .sidebar {
+        width: min(300px, 86vw);
+    }
+
+    .crumb {
+        max-width: 52vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ghost-button {
+        padding: 0.65rem 0.8rem;
+        font-size: 0.86rem;
     }
 }

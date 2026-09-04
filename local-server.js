@@ -5,6 +5,15 @@ const path = require("node:path");
 const root = __dirname;
 const port = Number(process.env.PORT || 3000);
 const maxQuestionLength = 4000;
+const htmlDocumentationPages = new Set([
+    "docs.html",
+    "getting-started.html",
+    "pro-pages.html",
+    "messaging-and-network.html",
+    "search-and-discovery.html",
+    "trust-and-verification.html",
+    "founding-team.html",
+]);
 const envPath = path.join(root, ".env");
 if (fs.existsSync(envPath)) {
     for (const line of fs.readFileSync(envPath, "utf8").split(/\r?\n/)) {
@@ -19,12 +28,20 @@ function collectFiles(directory) {
         .flatMap((entry) => {
             const entryPath = path.join(directory, entry.name);
             if (entry.isDirectory()) return collectFiles(entryPath);
-            return /\.mdx?$/.test(entry.name) ? [entryPath] : [];
+            const relativePath = path
+                .relative(root, entryPath)
+                .replaceAll("\\", "/");
+            return /\.mdx?$/.test(entry.name) ||
+                htmlDocumentationPages.has(relativePath)
+                ? [entryPath]
+                : [];
         });
 }
 
-function cleanMdx(source) {
+function cleanDocument(source) {
     return source
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .replace(/<style[\s\S]*?<\/style>/gi, "")
         .replace(/^---[\s\S]*?---\s*/, "")
         .replace(/<[^>]+>/g, "")
         .replace(/[*_`#>-]/g, " ")
@@ -41,7 +58,7 @@ function readDocs() {
         return {
             path: path.relative(root, filePath).replaceAll("\\", "/"),
             title,
-            text: cleanMdx(raw),
+            text: cleanDocument(raw),
         };
     });
 }
@@ -176,13 +193,19 @@ const server = http.createServer(async (request, response) => {
             return send(response, 404, { error: "Not found" });
         const type = filePath.endsWith(".html")
             ? "text/html; charset=utf-8"
-            : filePath.endsWith(".svg")
-              ? "image/svg+xml"
-              : filePath.endsWith(".png")
-                ? "image/png"
-                : filePath.endsWith(".md") || filePath.endsWith(".mdx")
-                  ? "text/plain; charset=utf-8"
-                  : "application/octet-stream";
+            : filePath.endsWith(".css")
+              ? "text/css; charset=utf-8"
+              : filePath.endsWith(".js")
+                ? "text/javascript; charset=utf-8"
+                : filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")
+                  ? "image/jpeg"
+                  : filePath.endsWith(".svg")
+                    ? "image/svg+xml"
+                    : filePath.endsWith(".png")
+                      ? "image/png"
+                      : filePath.endsWith(".md") || filePath.endsWith(".mdx")
+                        ? "text/plain; charset=utf-8"
+                        : "application/octet-stream";
         return send(response, 200, fs.readFileSync(filePath), type);
     } catch (error) {
         const status = error.message === "GEMINI_API_KEY_MISSING" ? 503 : 500;

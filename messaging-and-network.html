@@ -6,7 +6,7 @@
         <title>Messaging & network | XERA1 Docs</title>
         <meta
             name="description"
-            content="Utilisez la messagerie XERA1 pour échanger avec des builders et des entreprises autour de preuves concrètes."
+            content="Découvrez la messagerie directe (DMs), Supabase Realtime et les Push Notifications de XERA1 pour échanger entre builders et Pages Pro."
         />
         <link
             rel="canonical"
@@ -19,7 +19,7 @@
         />
         <meta
             property="og:description"
-            content="Guide de la messagerie XERA1 pour échanger, partager des preuves et créer des opportunités professionnelles."
+            content="Guide complet sur la messagerie 1:1 XERA1 (dm_conversations, dm_messages), la synchronisation Supabase Realtime et les notifications Push."
         />
         <meta
             property="og:url"
@@ -44,7 +44,7 @@
                 "@context": "https://schema.org",
                 "@type": "TechArticle",
                 "headline": "Messaging & network | XERA1 Docs",
-                "description": "Utilisez la messagerie XERA1 pour échanger avec des builders et des entreprises autour de preuves concrètes.",
+                "description": "Utilisez la messagerie XERA1 pour échanger entre builders et entreprises en temps réel.",
                 "inLanguage": "fr",
                 "mainEntityOfPage": "https://docs.xera1.xyz/messaging-and-network.html",
                 "isPartOf": {
@@ -86,7 +86,7 @@
                         <div class="brand-tag">Docs</div>
                     </div>
                 </div>
-                <div class="sidebar-search">
+                <div class="sidebar-search" id="sidebar-search">
                     <span>⌘K</span>
                     <input
                         type="search"
@@ -110,6 +110,12 @@
                     <a class="nav-item" href="trust-and-verification.html"
                         >Trust & verification</a
                     >
+                    <a class="nav-item" href="api-developers.html"
+                        >API / Developers</a
+                    >
+                    <a class="nav-item" href="founding-team.html"
+                        >Founding team</a
+                    >
                 </nav>
             </aside>
 
@@ -128,123 +134,43 @@
                 <div class="content-wrap">
                     <article class="doc-article">
                         <div class="eyebrow">03 / Messaging & network</div>
-                        <h1>Utiliser la messagerie dédiée</h1>
+                        <h1>Messagerie directe et réseau temps réel</h1>
 
                         <p>
-                            La messagerie XERA1 permet de passer de la simple
-                            découverte à une vraie relation. Vous pouvez envoyer
-                            des messages directs, partager une preuve, demander
-                            une clarification ou créer un premier contact
-                            qualifié.
+                            La messagerie XERA1 permet d'établir des échanges directs (DMs) entre builders, créateurs et Pages Professionnelles. Elle facilite les discussions B2B/B2C autour de preuves concrètes de travail.
                         </p>
 
-                        <div class="note-box">
-                            <strong>Vérification :</strong> ce workspace
-                            contient la documentation du produit, pas le moteur
-                            de messagerie de l’application. Les routes,
-                            permissions, pièces jointes, blocage, signalement et
-                            réponses depuis une Page PRO sont des
-                            fonctionnalités à confirmer dans la version
-                            déployée.
+                        <h2>1. Messagerie Directe 1:1 (DMs)</h2>
+                        <p>
+                            La présence de la messagerie directe est confirmée et fonctionnelle en base de données :
+                        </p>
+                        <ul>
+                            <li><strong>Conversations (`dm_conversations`)</strong> : Stocke les fils de discussion actifs entre deux utilisateurs ou entre un utilisateur et une Page PRO.</li>
+                            <li><strong>Messages (`dm_messages`)</strong> : Contient l'ensemble des messages horodatés, les identifiants d'expéditeur/destinataire et le statut de lecture.</li>
+                        </ul>
+
+                        <div class="code-block">
+                            <pre><code>Modèle DB Messagerie
+- Table conversations : `dm_conversations` (id, participant_a, participant_b, updated_at)
+- Table messages : `dm_messages` (id, conversation_id, sender_id, content, created_at, is_read)</code></pre>
                         </div>
 
-                        <h2>1. Envoyer un message</h2>
-                        <ol>
-                            <li>
-                                Ouvrez la messagerie depuis votre tableau de
-                                bord ou le profil d’un builder.
-                            </li>
-                            <li>Choisissez le contact ou l’entreprise.</li>
-                            <li>
-                                Rédigez le message avec contexte et objectif.
-                            </li>
-                            <li>Ajoutez des pièces jointes si nécessaire.</li>
-                            <li>Envoyez la demande.</li>
-                        </ol>
-
-                        <div class="callout">
-                            <strong>Good practice :</strong> Un message utile
-                            parle de contexte, de preuve et de la raison du
-                            contact. Ex. : “Je viens de publier la version beta
-                            de mon MVP et j’aimerais obtenir votre point de vue
-                            sur le parcours d’inscription.”
-                        </div>
-
-                        <h2>2. Partager des preuves</h2>
+                        <h2>2. Architecture Temps Réel (Supabase Realtime)</h2>
                         <p>
-                            Les messages peuvent inclure des captures, des liens
-                            vers des jalons, des démonstrations ou des
-                            références d’exécution. Cela permet de rendre le
-                            dialogue concret et crédible.
+                            La messagerie s'appuie sur une infrastructure réactive garantissant la réception instantanée des messages :
                         </p>
-
                         <ul>
-                            <li>
-                                Partager une capture d’écran de progression.
-                            </li>
-                            <li>
-                                Envoyer un lien vers un jalon ou une preuve.
-                            </li>
-                            <li>
-                                Joindre un court devis ou un point de contexte.
-                            </li>
+                            <li><strong>Écoute Realtime (`postgres_changes`)</strong> : Abonnements WebSocket aux événements `INSERT` sur la table `dm_messages` pour actualiser l'interface sans rechargement.</li>
+                            <li><strong>Fallback par Polling</strong> : En cas d'interruption du canal WebSocket (ex: réseau instable), un mécanisme de polling automatique prend le relais de façon transparente.</li>
                         </ul>
 
-                        <h2>3. Interagir avec les pages PRO</h2>
+                        <h2>3. Système de Notifications</h2>
                         <p>
-                            Comme builder, vous pouvez contacter une entreprise
-                            via sa page PRO. Comme entreprise, vous pouvez
-                            répondre au nom de votre marque, dans un cadre plus
-                            formel et orienté conversion.
+                            Afin d'assurer la réactivité des échanges, XERA1 intègre deux niveaux de notification :
                         </p>
-
                         <ul>
-                            <li>
-                                Les builders peuvent initier une conversation.
-                            </li>
-                            <li>
-                                Les entreprises peuvent répondre directement
-                                depuis la page.
-                            </li>
-                            <li>
-                                Une conversation bien cadrée transforme la
-                                découverte en opportunité.
-                            </li>
-                        </ul>
-
-                        <h2>4. Règles de sécurité et confidentialité</h2>
-                        <p>
-                            La messagerie doit toujours être utilisée avec
-                            prudence. Ne partagez jamais de mot de passe, de
-                            code OTP, de document sensible, de donnée
-                            personnelle ou d’information non publique sans une
-                            procédure explicite.
-                        </p>
-
-                        <ul>
-                            <li>
-                                vérifiez la bonne conversation avant d’envoyer ;
-                            </li>
-                            <li>gardez le message court et contextuel ;</li>
-                            <li>utilisez des pièces jointes non sensibles ;</li>
-                            <li>signalez les contenus abusifs ou douteux ;</li>
-                            <li>
-                                conservez les règles de modération et d’accès
-                                pour validation produit.
-                            </li>
-                        </ul>
-
-                        <h2>5. Bonnes pratiques</h2>
-                        <p>Gardez vos messages clairs, bref et utiles.</p>
-
-                        <ul>
-                            <li>Précisez votre objectif.</li>
-                            <li>Faites référence à un fait concret.</li>
-                            <li>Demandez une réponse simple et mesurable.</li>
-                            <li>
-                                Ne partagez jamais d’informations sensibles dans
-                                le chat.
-                            </li>
+                            <li><strong>Notifications In-App</strong> : Badges et alertes visuelles instantanés dans l'application lors de l'arrivée d'un nouveau message.</li>
+                            <li><strong>Push Notifications Web (`web-push`)</strong> : Notifications navigateur distantes envoyées à l'utilisateur même lorsque l'onglet XERA1 n'est pas actif.</li>
                         </ul>
                     </article>
                 </div>

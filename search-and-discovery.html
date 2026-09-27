@@ -6,7 +6,7 @@
         <title>Search & discovery | XERA1 Docs</title>
         <meta
             name="description"
-            content="Explorez le feed XERA1 et trouvez des builders, projets et preuves grâce à la recherche contextuelle."
+            content="Découvrez la Command Palette Cmd+K, la recherche dans les 3 entités DB et l'algorithme de recommandation multi-signaux du Feed Discover de XERA1."
         />
         <link
             rel="canonical"
@@ -16,7 +16,7 @@
         <meta property="og:title" content="Feed immersif et recherche XERA1" />
         <meta
             property="og:description"
-            content="Découvrez le feed immersif XERA1 et la recherche contextualisée de builders, projets et preuves."
+            content="Guide complet sur la recherche XERA1 (Command Palette, 3 entités indexées, mode hors-ligne) et le moteur de recommandation multi-signaux du feed."
         />
         <meta
             property="og:url"
@@ -41,7 +41,7 @@
                 "@context": "https://schema.org",
                 "@type": "TechArticle",
                 "headline": "Search & discovery | XERA1 Docs",
-                "description": "Explorez le feed XERA1 et trouvez des builders, projets et preuves grâce à la recherche contextuelle.",
+                "description": "Explorez le feed XERA1, la command palette et l'algorithme du feed de découverte.",
                 "inLanguage": "fr",
                 "mainEntityOfPage": "https://docs.xera1.xyz/search-and-discovery.html",
                 "isPartOf": {
@@ -83,7 +83,7 @@
                         <div class="brand-tag">Docs</div>
                     </div>
                 </div>
-                <div class="sidebar-search">
+                <div class="sidebar-search" id="sidebar-search">
                     <span>⌘K</span>
                     <input
                         type="search"
@@ -107,6 +107,12 @@
                     <a class="nav-item" href="trust-and-verification.html"
                         >Trust & verification</a
                     >
+                    <a class="nav-item" href="api-developers.html"
+                        >API / Developers</a
+                    >
+                    <a class="nav-item" href="founding-team.html"
+                        >Founding team</a
+                    >
                 </nav>
             </aside>
 
@@ -126,135 +132,75 @@
                 <div class="content-wrap">
                     <article class="doc-article">
                         <div class="eyebrow">04 / Search & discovery</div>
-                        <h1>Le feed immersif et la recherche contextualisée</h1>
+                        <h1>Command Palette, Recherche et Algorithme du Feed</h1>
 
                         <p>
-                            XERA1 combine un feed immersif, une recherche rapide
-                            et un système de découverte orienté vers la qualité
-                            de la preuve. L’objectif est de réduire le bruit et
-                            de mettre en avant les builders qui publient
-                            réellement.
+                            XERA1 combine une palette de commande instantanée, un moteur de recherche dans la base de données et un algorithme de recommandation multi-signaux pour valoriser les preuves de travail les plus pertinentes.
                         </p>
 
-                        <div class="note-box">
-                            <strong>Vérification :</strong> le dépôt contient
-                            une recherche documentaire locale et un assistant
-                            capable de lire les pages HTML/Markdown. La
-                            recherche produit, les catégories, les tendances et
-                            le feed social ne sont pas implémentés dans ce
-                            workspace et doivent être testés en production avant
-                            d’être présentés comme disponibles.
-                        </div>
-
-                        <h2>1. La recherche documentaire actuelle</h2>
+                        <h2>1. Command Palette (`dedicated-search-overlay`)</h2>
                         <p>
-                            Dans ce dépôt, la fonctionnalité visible est une
-                            recherche locale de documentation. Elle est activée
-                            par le bouton <strong>Search docs</strong> ou par
-                            <strong>Ctrl+K</strong> / <strong>Cmd+K</strong>.
-                            Elle ne traite pas les profils, les ARCs, les Traces
-                            ou le réseau productif de XERA1.
+                            La recherche est accessible à tout moment via la palette de commande :
                         </p>
-
                         <ul>
-                            <li>index des pages HTML et Markdown ;</li>
-                            <li>filtres sur le texte de la documentation ;</li>
-                            <li>overlay de recherche local ;</li>
-                            <li>
-                                aucune persistance de l’historique utilisateur
-                                réelle.
-                            </li>
+                            <li><strong>Raccourcis clavier</strong> : Déclenchement via `Cmd+K` (macOS) ou `Ctrl+K` (Windows/Linux). Touche `ESC` pour fermer l'overlay.</li>
+                            <li><strong>Interface dédié</strong> : Overlay modal `dedicated-search-overlay` proposant une frappe réactive et un affichage en temps réel.</li>
+                            <li><strong>Historique & Mode Hors-ligne</strong> : Conservation d'un historique de recherche local sur 7 jours et support du mode hors-ligne pour les recherches récentes.</li>
                         </ul>
 
-                        <h2>2. La recherche produit cible</h2>
+                        <h2>2. Portée de la Recherche (3 Entités Indexées)</h2>
                         <p>
-                            La version cible de XERA1 prévoit un moteur de
-                            recherche produit. Il doit distinguer :
+                            Le moteur de recherche interroge directement 3 entités principales dans la base de données Supabase :
+                        </p>
+                        <ol>
+                            <li><strong>Utilisateurs (`users`)</strong> : Recherche par nom d'utilisateur, titre professionnel et bio.</li>
+                            <li><strong>Contenus / Preuves (`content`)</strong> : Recherche dans les titres et descriptions des preuves publiées.</li>
+                            <li><strong>Pages Professionnelles (`professional_pages`)</strong> : Recherche par nom de marque, bio, description et secteur d'activité / industrie.</li>
+                        </ol>
+
+                        <h2>3. Algorithme du Feed Discover (Moteur Multi-Signaux)</h2>
+                        <p>
+                            Le fil de découverte de XERA1 n'est pas un simple flux chronologique. Il s'appuie sur un <strong>moteur de recommandation multi-signaux</strong> pondéré :
                         </p>
 
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Signal de Recommandation</th>
+                                    <th>Pondération</th>
+                                    <th>Description / Indicateurs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Engagement</strong></td>
+                                    <td><strong>40%</strong></td>
+                                    <td>Interactions, réactions, commentaires et partages générés par le contenu.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Qualité Créateur</strong></td>
+                                    <td><strong>35%</strong></td>
+                                    <td>Régularité du builder, statut certifié et niveau de réputation.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fraîcheur Temporelle</strong></td>
+                                    <td><strong>25%</strong></td>
+                                    <td>Récence de la publication et actualité de l'étape.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Facteurs d'Amplification et Diversification</h3>
                         <ul>
-                            <li>la recherche documentaire ;</li>
-                            <li>la recherche dans les profils et ARCs ;</li>
-                            <li>la recherche dans les preuves et jalons ;</li>
-                            <li>
-                                la recherche de personnes, entreprises et
-                                contenus pertinents.
-                            </li>
+                            <li><strong>Bonus de Momentum Proof of Work</strong> : Récompense la vitesse et la cadence de publication de preuves quotidiennes.</li>
+                            <li><strong>Gravité Sociale</strong> : Prise en compte des validations de jalons par des tiers, des témoins et des partages réseau.</li>
+                            <li><strong>Pertinence Pro</strong> : Alignement avec les centres d'intérêt du visiteur et les sujets techniques.</li>
+                            <li><strong>Ratio d'Exploration (~12%)</strong> : Injection contrôlée d'environ 12% de contenus diversifiés pour faire découvrir de nouveaux créateurs émergents.</li>
                         </ul>
 
-                        <div class="callout">
-                            <strong>À confirmer :</strong> les catégories
-                            exactes, la commande <strong>/search</strong>, les
-                            données de tendances, la durée de conservation de 7
-                            jours et les règles de suppression doivent être
-                            validées dans le produit réel.
-                        </div>
-
-                        <h2>3. Feed immersif</h2>
+                        <h2>4. Infinite Scroll et Pagination</h2>
                         <p>
-                            Le feed immersif donne une expérience de lecture
-                            plus profonde. Les contenus sont plus lisibles, plus
-                            contextuels et plus centrés sur le moment
-                            d’exécution.
-                        </p>
-
-                        <ul>
-                            <li>navigation verticale et immersive,</li>
-                            <li>focus sur la preuve publiée,</li>
-                            <li>
-                                interaction avec un média ou une description,
-                            </li>
-                            <li>
-                                fermeture rapide par geste ou bouton visible.
-                            </li>
-                        </ul>
-
-                        <h2>4. Historique et tendances</h2>
-                        <p>
-                            La documentation cible mentionne un historique de
-                            recherche éphémère et des tendances de recherche sur
-                            7 jours. Ces éléments sont utiles pour la
-                            recommandation, mais leur exactitude technique est à
-                            confirmer.
-                        </p>
-
-                        <ul>
-                            <li>
-                                historique persistant au navigateur ou au compte
-                                ?
-                            </li>
-                            <li>
-                                suppression manuelle par <strong>×</strong> ou
-                                tous les termes ?
-                            </li>
-                            <li>
-                                tendances calculées par popularité, activité ou
-                                confiance ?
-                            </li>
-                            <li>
-                                période de 7 jours, 30 jours ou contexte réel ?
-                            </li>
-                        </ul>
-
-                        <h2>5. Découverte</h2>
-                        <p>
-                            Le moteur de découverte met en avant les profils et
-                            contenus les plus cohérents avec vos intérêts, votre
-                            activité et les signaux de progression. Cela n’est
-                            pas visible dans ce workspace, mais il s’agit d’un
-                            axe majeur de la plateforme XERA1.
-                        </p>
-
-                        <h2>6. Vérification finale</h2>
-                        <p>
-                            Vous êtes prêt à utiliser la recherche XERA1 lorsque
-                            vous pouvez distinguer la recherche documentaire de
-                            la recherche produit, identifier les catégories et
-                            les filtres, expliquer le principe de contenu
-                            immersif, et comprendre que les tendances et
-                            l’historique restent
-                            <strong>à confirmer</strong> tant qu’ils n’ont pas
-                            été testés en production.
+                            L'affichage du feed est optimisé pour une grande fluide d'utilisation : la pagination s'effectue progressivement par blocs de <strong>20 éléments</strong> déclenchés automatiquement grâce à l'API `IntersectionObserver`.
                         </p>
                     </article>
                 </div>

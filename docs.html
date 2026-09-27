@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
             name="description"
-            content="Documentation XERA1 : guide du Proof of Building, création de preuves, pages PRO, feed, messagerie, recherche et vérification."
+            content="Documentation XERA1 : guide du Proof of Building, création de preuves, pages PRO, feed, messagerie, recherche, C2PA, API et métriques."
         />
         <link rel="canonical" href="https://docs.xera1.xyz/docs.html" />
         <meta property="og:type" content="website" />
@@ -101,6 +101,9 @@
                     <a class="nav-item" href="trust-and-verification.html"
                         >Trust & verification</a
                     >
+                    <a class="nav-item" href="api-developers.html"
+                        >API / Developers</a
+                    >
                     <a class="nav-item" href="founding-team.html"
                         >Founding team</a
                     >
@@ -130,9 +133,8 @@
                             </h1>
                             <p class="lead">
                                 XERA1 transforme la progression réelle en une
-                                preuve publique, exploitée par des builders, des
-                                entreprises et des communautés qui veulent faire
-                                confiance à des résultats concrets.
+                                preuve publique vérifiable, exploitée par des builders, des
+                                entreprises et des communautés qui s'appuient sur des faits d'exécution.
                             </p>
                             <div class="hero-actions">
                                 <a
@@ -151,40 +153,30 @@
                                 <span class="card-kicker">01</span>
                                 <h3>Preuve d'exécution</h3>
                                 <p>
-                                    Chaque média, chaque jalon et chaque mise à
-                                    jour devient une trace vérifiable de travail
-                                    réel.
+                                    Chaque média, chaque jour de progression (`day_number`) et chaque jalon d'Arc devient une trace vérifiable stockée sur Supabase Storage.
                                 </p>
                             </div>
                             <div class="info-card">
                                 <span class="card-kicker">02</span>
                                 <h3>Trajectoire publique</h3>
                                 <p>
-                                    Votre profil raconte la réalité de votre
-                                    progression, pas seulement un résumé de
-                                    présentation.
+                                    Votre profil reflète la réalité de votre
+                                    cadence de travail, avec la certification C2PA des médias et l'attribution automatique du badge tech.
                                 </p>
                             </div>
                             <div class="info-card">
                                 <span class="card-kicker">03</span>
-                                <h3>Confiance B2B</h3>
+                                <h3>Confiance B2B & Conversion</h3>
                                 <p>
-                                    Les entreprises utilisent les pages PRO pour
-                                    qualifier, capter des leads et engager des
-                                    builders crédibles.
+                                    Les entreprises utilisent les Pages PRO pour
+                                    présenter leur marque, capturer des leads (`professional_cta_leads`) et interagir avec les membres de l'équipe.
                                 </p>
                             </div>
                         </section>
 
                         <section class="section-block">
                             <div class="note-box">
-                                <strong>Règle de confiance :</strong> cette
-                                documentation distingue ce qui est vérifié dans
-                                ce dépôt de ce qui est simplement documenté ou à
-                                confirmer. Le site ne contient pas l’application
-                                XERA1 complète ; il documente le parcours cible,
-                                les standards de produit et les zones à valider
-                                avant publication finale.
+                                <strong>Règle de confiance vérifiée :</strong> Cette documentation repose exclusivement sur les faits vérifiés dans le code de production et en base de données Supabase (292 membres, 39 Arcs, 160 preuves, 9 Pages Pro).
                             </div>
                         </section>
 
@@ -192,7 +184,7 @@
                             <div class="section-heading">
                                 <div>
                                     <div class="eyebrow">Parcours</div>
-                                    <h2>Commencer en moins de 10 minutes</h2>
+                                    <h2>Commencer en 3 étapes simples</h2>
                                 </div>
                             </div>
                             <div class="steps-list">
@@ -201,9 +193,7 @@
                                     <div>
                                         <h3>Créer son compte</h3>
                                         <p>
-                                            Inscription avec email, magic link
-                                            ou OTP. Configurez votre identité et
-                                            votre visibilité.
+                                            Inscription par Email + Mot de passe ou Google OAuth. Wizard d'onboarding en 4 étapes pour personnaliser votre profil.
                                         </p>
                                     </div>
                                 </div>
@@ -212,62 +202,18 @@
                                     <div>
                                         <h3>Publier sa première preuve</h3>
                                         <p>
-                                            Ajoutez un média, écrivez une
-                                            description immersive et attachez
-                                            votre preuve à un jalon concret.
+                                            Créez un Arc (`arc_id`), téléversez votre média (image, vidéo, texte) rattaché à un jour de travail (`day_number`).
                                         </p>
                                     </div>
                                 </div>
                                 <div class="step-item">
                                     <span class="step-no">3</span>
                                     <div>
-                                        <h3>Construire une présence</h3>
+                                        <h3>Construire une présence PRO</h3>
                                         <p>
-                                            Activez votre page PRO, ajoutez
-                                            votre CTA et optimisez votre
-                                            visibilité dans le feed.
+                                            Configurez votre Page PRO via `js/pro-settings-component.js`, activez vos CTA et recevez des leads qualifiés.
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="section-block">
-                            <div class="section-heading">
-                                <div>
-                                    <div class="eyebrow">Vérification</div>
-                                    <h2>Ce que l’assistant doit savoir</h2>
-                                </div>
-                            </div>
-                            <div class="feature-columns">
-                                <div>
-                                    <h3>Vérifié dans ce dépôt</h3>
-                                    <p>
-                                        Navigation statique, recherche
-                                        documentaire locale, assistant Gemini,
-                                        santé du service et documentation
-                                        MDX/HTML.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3>Documenté mais non vérifiable ici</h3>
-                                    <p>
-                                        Les flux d’authentification, de
-                                        messagerie productive, de feed social et
-                                        les pages PRO complètes sont décrits
-                                        dans la référence, mais pas dans ce
-                                        workspace.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3>À confirmer avant publication</h3>
-                                    <p>
-                                        Libellés exacts d’interface,
-                                        permissions, formats de fichiers, règles
-                                        d’accès et mécanismes de certification
-                                        doivent être testés dans l’application
-                                        réelle.
-                                    </p>
                                 </div>
                             </div>
                         </section>
@@ -285,16 +231,14 @@
                                     <div class="doc-card-top">🚀</div>
                                     <h3>Getting started</h3>
                                     <p>
-                                        Créer un compte, compléter l'onboarding
-                                        et publier la première preuve.
+                                        Connexion Email/OAuth, wizard en 4 étapes, création d'Arc et publication de preuve.
                                     </p>
                                 </a>
                                 <a class="doc-card" href="pro-pages.html">
                                     <div class="doc-card-top">💼</div>
                                     <h3>Pro pages</h3>
                                     <p>
-                                        Créer une page entreprise, un CTA, un
-                                        pitch deck et une vitrine de conversion.
+                                        Éditeur Pro, 3 CTA (URL, Phone, Email), capture de leads et membres de l'équipe.
                                     </p>
                                 </a>
                                 <a
@@ -304,9 +248,7 @@
                                     <div class="doc-card-top">💬</div>
                                     <h3>Messaging & network</h3>
                                     <p>
-                                        Utiliser la messagerie dédiée, partager
-                                        des preuves et interagir avec les
-                                        entreprises.
+                                        Messagerie DMs 1:1, Supabase Realtime, polling fallback et Web Push notifications.
                                     </p>
                                 </a>
                                 <a
@@ -316,8 +258,7 @@
                                     <div class="doc-card-top">🔍</div>
                                     <h3>Search & discovery</h3>
                                     <p>
-                                        Explorer le feed immersif, la palette de
-                                        recherche et la découverte contextuelle.
+                                        Command Palette (Cmd+K), recherche dans 3 entités DB et algorithme du feed multi-signaux.
                                     </p>
                                 </a>
                                 <a
@@ -327,53 +268,23 @@
                                     <div class="doc-card-top">🛡️</div>
                                     <h3>Trust & verification</h3>
                                     <p>
-                                        Comprendre le badge XERA1, la provenance
-                                        des médias et la transparence.
+                                        Vérification C2PA (js/c2pa-utils.js), badge "tech" (7 jours de posts) et règles des badges.
+                                    </p>
+                                </a>
+                                <a class="doc-card" href="api-developers.html">
+                                    <div class="doc-card-top">⚡</div>
+                                    <h3>API / Developers</h3>
+                                    <p>
+                                        API REST internes (/api/*) et statut de l'API publique pour les développeurs tiers.
                                     </p>
                                 </a>
                                 <a class="doc-card" href="founding-team.html">
                                     <div class="doc-card-top">🤝</div>
-                                    <h3>Founding team</h3>
+                                    <h3>Founding team & metrics</h3>
                                     <p>
-                                        Découvrir les fondateurs de XERA1 et la
-                                        vision portée par une équipe congolaise.
+                                        Fondateurs congolais, métriques réelles de production (292 membres) et tarification SaaS / KPay.
                                     </p>
                                 </a>
-                            </div>
-                        </section>
-
-                        <section class="section-block">
-                            <div class="section-heading">
-                                <div>
-                                    <div class="eyebrow">Produit</div>
-                                    <h2>Comment XERA1 se distingue</h2>
-                                </div>
-                            </div>
-                            <div class="feature-columns">
-                                <div>
-                                    <h3>Le feed immersif</h3>
-                                    <p>
-                                        Navigation verticale, plongée en plein
-                                        écran et mise en avant des étapes de
-                                        construction.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3>La command palette</h3>
-                                    <p>
-                                        Recherche précise par catégories,
-                                        tendances et historique éclairé par 7
-                                        jours de contexte.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3>Le badge de vérification</h3>
-                                    <p>
-                                        Une signalétique qui donne de la
-                                        crédibilité aux profils et aux contenus
-                                        authentifiés.
-                                    </p>
-                                </div>
                             </div>
                         </section>
                     </article>

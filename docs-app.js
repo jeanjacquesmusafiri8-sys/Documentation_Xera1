@@ -2,37 +2,42 @@ const docs = [
     {
         title: "Accueil",
         path: "docs.html",
-        text: "Documentation XERA1, Proof of Building, pages PRO, feed immersif, recherche, messagerie et vérification.",
+        text: "Documentation XERA1, Proof of Building, pages PRO, feed immersif, recherche, messagerie, C2PA et métriques.",
     },
     {
         title: "Getting started",
         path: "getting-started.html",
-        text: "Créer son compte XERA1, compléter l’onboarding, publier sa première preuve et certifier un jalon.",
+        text: "Créer son compte XERA1 par Email/Google OAuth, wizard 4 étapes, créer un Arc et publier une preuve.",
     },
     {
         title: "Pro pages",
         path: "pro-pages.html",
-        text: "Créer et configurer une Page PRO, activer un CTA, capturer des leads, diffusions B2B et pitch deck.",
+        text: "Éditeur de Page PRO (pro-settings-component.js), 3 CTA (url, phone, email), capture de leads et membres d'équipe.",
     },
     {
         title: "Messaging",
         path: "messaging-and-network.html",
-        text: "Messagerie dédiée, échanges directs, pièces jointes et interactions entre builders et entreprises.",
+        text: "Messagerie directe DMs (dm_conversations, dm_messages), Supabase Realtime avec polling fallback et Push notifications.",
     },
     {
         title: "Search & discovery",
         path: "search-and-discovery.html",
-        text: "Feed immersif, commande /search, catégories de découverte et historique de recherche automatique.",
+        text: "Command Palette (Cmd+K), recherche dans 3 entités DB (users, content, professional_pages) et algorithme de feed multi-signaux.",
     },
     {
         title: "Trust & verification",
         path: "trust-and-verification.html",
-        text: "Badge de certification XERA1, provenance des médias, authenticité et sécurité des contenus.",
+        text: "Vérification C2PA (js/c2pa-utils.js), badge tech (7 jours consécutifs de posts), badges payants et admin.",
     },
     {
-        title: "Founding team",
+        title: "API / Developers",
+        path: "api-developers.html",
+        text: "API REST internes (/api/*) pour l'application web XERA1 et statut de l'API publique pour les tiers.",
+    },
+    {
+        title: "Founding team & metrics",
         path: "founding-team.html",
-        text: "Présentation de l’équipe fondatrice de XERA1 : Gibril Mad, Ready Kalonda, Jean Jacques Musafiri et ILD Faida, tous congolais.",
+        text: "Équipe fondatrice congolaise, métriques réelles de production Supabase (292 membres) et tarification SaaS / KPay Mobile Money.",
     },
 ];
 

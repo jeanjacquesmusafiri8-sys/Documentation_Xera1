@@ -17,10 +17,9 @@
         { "title": "Pro pages", "href": "pro-pages.html" },
         { "title": "Messaging", "href": "messaging-and-network.html" },
         { "title": "Search & discovery", "href": "search-and-discovery.html" },
-        {
-            "title": "Trust & verification",
-            "href": "trust-and-verification.html"
-        }
+        { "title": "Trust & verification", "href": "trust-and-verification.html" },
+        { "title": "API / Developers", "href": "api-developers.html" },
+        { "title": "Founding team", "href": "founding-team.html" }
     ],
     "status": "standalone-docs-v2"
 }

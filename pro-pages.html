@@ -6,7 +6,7 @@
         <title>Pro pages | XERA1 Docs</title>
         <meta
             name="description"
-            content="Découvrez comment créer une page PRO XERA1, présenter votre activité et capter des leads qualifiés."
+            content="Découvrez comment créer une Page PRO XERA1 via l'éditeur dédié, configurer un CTA, capter des leads et gérer l'équipe."
         />
         <link rel="canonical" href="https://docs.xera1.xyz/pro-pages.html" />
         <meta property="og:type" content="article" />
@@ -16,7 +16,7 @@
         />
         <meta
             property="og:description"
-            content="Apprenez à créer une page PRO XERA1, présenter votre activité et convertir des demandes B2B."
+            content="Apprenez à configurer une page PRO XERA1 via js/pro-settings-component.js, utiliser les 3 types de CTA et convertir des demandes de prospects."
         />
         <meta
             property="og:url"
@@ -41,7 +41,7 @@
                 "@context": "https://schema.org",
                 "@type": "TechArticle",
                 "headline": "Pro pages | XERA1 Docs",
-                "description": "Découvrez comment créer une page PRO XERA1, présenter votre activité et capter des leads qualifiés.",
+                "description": "Découvrez comment créer une Page PRO XERA1 via l'éditeur dédié, configurer un CTA et capter des leads qualifiés.",
                 "inLanguage": "fr",
                 "mainEntityOfPage": "https://docs.xera1.xyz/pro-pages.html",
                 "isPartOf": {
@@ -83,7 +83,7 @@
                         <div class="brand-tag">Docs</div>
                     </div>
                 </div>
-                <div class="sidebar-search">
+                <div class="sidebar-search" id="sidebar-search">
                     <span>⌘K</span>
                     <input
                         type="search"
@@ -109,6 +109,12 @@
                     <a class="nav-item" href="trust-and-verification.html"
                         >Trust & verification</a
                     >
+                    <a class="nav-item" href="api-developers.html"
+                        >API / Developers</a
+                    >
+                    <a class="nav-item" href="founding-team.html"
+                        >Founding team</a
+                    >
                 </nav>
             </aside>
 
@@ -127,160 +133,74 @@
                 <div class="content-wrap">
                     <article class="doc-article">
                         <div class="eyebrow">02 / Pro pages</div>
-                        <h1>Créer et configurer une page PRO</h1>
+                        <h1>Créer et configurer une Page PRO</h1>
 
                         <p>
-                            Une page PRO transforme un profil individuel en une
-                            vitrine d’entreprise ou de marque. C’est la
-                            meilleure manière de capturer des demandes B2B,
-                            afficher des preuves de travail, orienter des leads
-                            et présenter une trajectoire avec plus de clarté.
+                            Une <strong>Page PRO</strong> transforme une présence sur XERA1 en vitrine professionnelle pour entreprise, startup ou studio. Elle permet de présenter l'activité, de regrouper les preuves de travail de l'équipe et de convertir l’audience via des boutons CTA et un système de capture de leads.
                         </p>
 
-                        <div class="note-box">
-                            <strong>Vérification :</strong> le workspace ne
-                            contient pas l’éditeur de page PRO ni le système de
-                            leads. Les champs exacts, les rôles d’administration
-                            et les permissions doivent être validés dans
-                            l’application déployée avant publication.
-                        </div>
-
-                        <h2>1. Différence entre profil et page PRO</h2>
+                        <h2>1. Éditeur de Page PRO</h2>
                         <p>
-                            Le profil personnel met l’accent sur la progression,
-                            les projets et le porteur de projet. La page PRO,
-                            elle, sert à convertir un intérêt en action :
-                            réservation de démo, demande de pitch deck,
-                            candidature, recrutement ou accès à un repo.
+                            L'éditeur de Page PRO est un composant entièrement fonctionnel et vérifié dans le code source (`js/pro-settings-component.js`). Il permet d'administrer directement :
                         </p>
-
                         <ul>
-                            <li>
-                                <strong>Profil</strong> : parcours, travail,
-                                preuve, réputation.
-                            </li>
-                            <li>
-                                <strong>Page PRO</strong> : vitrine commerciale,
-                                CTA, conversion, qualification.
-                            </li>
+                            <li><strong>Identité de la marque</strong> : Nom officiel, slug d'URL personnalisé, bio et description détaillée.</li>
+                            <li><strong>Secteur & Localisation</strong> : Industrie / domaine d'activité et localisation géographique.</li>
+                            <li><strong>Visuels</strong> : Logo officiel de la marque et bannière de couverture.</li>
+                            <li><strong>Réseaux & Liens</strong> : Ensemble des liens sociaux et professionnels (site web, GitHub, Twitter/X, LinkedIn, etc.).</li>
                         </ul>
 
-                        <h2>2. Créer une page PRO</h2>
-                        <ol>
-                            <li>
-                                Ouvrez le mode création de page PRO dans le
-                                tableau de bord.
-                            </li>
-                            <li>
-                                Sélectionnez le type de présence : entreprise,
-                                équipe, studio, communauté ou marque.
-                            </li>
-                            <li>
-                                Renseignez le nom, la description, le logo, la
-                                bannière et le site web.
-                            </li>
-                            <li>
-                                Activez le CTA et les sections clés de la
-                                vitrine.
-                            </li>
-                        </ol>
-
-                        <div class="callout">
-                            <strong>Tip :</strong> Un bon CTA répond à une seule
-                            question : “Que veux faire la personne qui arrive
-                            ici ?”
-                        </div>
-
-                        <h2>3. Configurer le CTA</h2>
+                        <h2>2. Boutons CTA & Capture de Leads</h2>
                         <p>
-                            Le CTA est le point de conversion principal. Il
-                            orientera les visiteurs vers l’action la plus utile
-                            pour votre contexte : démonstration, investissement,
-                            recrutement, collaboration ou documentation.
+                            Les Pages PRO intègrent un système d'action et de qualification de prospects :
                         </p>
 
+                        <h3>Les 3 types de CTA disponibles</h3>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Objectif</th>
-                                    <th>Exemple de CTA</th>
-                                    <th>Risque à surveiller</th>
+                                    <th>Type de CTA</th>
+                                    <th>Identifiant</th>
+                                    <th>Fonctionnement</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Réservation de démo</td>
-                                    <td>Calendly, Cal.com, booking</td>
-                                    <td>
-                                        lien non fonctionnel ou mauvais contexte
-                                    </td>
+                                    <td><strong>Lien Web</strong></td>
+                                    <td>`url`</td>
+                                    <td>Redirection vers un site externe, Calendly, démo ou documentation.</td>
                                 </tr>
                                 <tr>
-                                    <td>Pitch deck</td>
-                                    <td>document de présentation</td>
-                                    <td>
-                                        document confidentiel exposé
-                                        publiquement
-                                    </td>
+                                    <td><strong>Téléphone</strong></td>
+                                    <td>`phone`</td>
+                                    <td>Déclenchement direct d'un appel téléphonique ou WhatsApp.</td>
                                 </tr>
                                 <tr>
-                                    <td>Recrutement</td>
-                                    <td>postes et candidatures</td>
-                                    <td>
-                                        offres obsolètes ou accès non maîtrisés
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Externe</td>
-                                    <td>GitHub, Discord, site web</td>
-                                    <td>redirection vers le mauvais domaine</td>
+                                    <td><strong>Email</strong></td>
+                                    <td>`email`</td>
+                                    <td>Ouverture d'un formulaire de contact direct / client mail.</td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <div class="code-block">
-                            <pre><code>Exemple de CTA
-Objectif : sales
-Label : Réserver une démo
-URL : https://cal.com/mon-projet
-Type : external</code></pre>
-                        </div>
-
-                        <h2>4. Optimiser la vitrine</h2>
+                        <h3>Système de Capture de Leads</h3>
                         <p>
-                            La page PRO doit être plus qu’un simple résumé.
-                            Ajoutez des éléments qui rendent la valeur
-                            immédiatement compréhensible.
+                            Lorsqu'un visiteur interagit avec le CTA de contact d'une Page PRO, une modale de contact dynamique s'affiche. La soumission de ce formulaire enregistre automatiquement une demande de prospect qualifiée dans la table Supabase `professional_cta_leads`. Les administrateurs de la Page PRO peuvent ainsi retrouver et gérer leurs leads directement.
                         </p>
 
-                        <ul>
-                            <li>Texte de positioning clair.</li>
-                            <li>
-                                Preuves visibles : jalons, résultats, captures,
-                                démonstrations.
-                            </li>
-                            <li>
-                                Informations de contact ou de qualification.
-                            </li>
-                            <li>
-                                Sections de preuve sur les livrables et les
-                                résultats.
-                            </li>
-                        </ul>
+                        <div class="code-block">
+                            <pre><code>Structure de capture de leads
+Table DB : `professional_cta_leads`
+Champs : id, page_id, visitor_id, contact_type (url/phone/email), message, created_at</code></pre>
+                        </div>
 
-                        <h2>5. Rôles et administration</h2>
+                        <h2>3. Rôles et Gestion de l'Équipe</h2>
                         <p>
-                            La gestion de la page PRO implique des admins,
-                            parfois plusieurs personnes, parfois une équipe. Les
-                            rôles, les invitations et les niveaux d’accès
-                            doivent être validés dans le produit réel avant de
-                            promettre une sécurité ou une gouvernance précise.
+                            Le rattachement de collaborateurs et membres certifiés à une Page PRO est opérationnel grâce à la table de liaison `partner_page_memberships`. Cela permet d'afficher les membres officiels travaillant pour l'organisation.
                         </p>
 
                         <div class="note-box">
-                            <strong>Note :</strong> Les pages PRO doivent être
-                            lisibles, rapides, cohérentes et orientées vers une
-                            conversion sans friction.
+                            <strong>À confirmer / En cours d'évolution :</strong> La gestion multi-administrateur avec rôles et permissions granulaires (admin, éditeur, modérateur) est actuellement en cours d'évolution. Pour l'instant, chaque Page PRO est rattachée à un propriétaire unique identifié par `owner_id`.
                         </div>
                     </article>
                 </div>

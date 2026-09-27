@@ -12,6 +12,7 @@ const htmlDocumentationPages = new Set([
     "messaging-and-network.html",
     "search-and-discovery.html",
     "trust-and-verification.html",
+    "api-developers.html",
     "founding-team.html",
 ]);
 const envPath = path.join(root, ".env");

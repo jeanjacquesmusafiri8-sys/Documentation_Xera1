@@ -6,7 +6,7 @@
         <title>Trust & verification | XERA1 Docs</title>
         <meta
             name="description"
-            content="Comprenez la vérification XERA1, la provenance des médias et les signaux de confiance des profils."
+            content="Documentation de la vérification C2PA, des badges de certification (tech, abonnements, admin) et de la sécurité sur XERA1."
         />
         <link
             rel="canonical"
@@ -19,7 +19,7 @@
         />
         <meta
             property="og:description"
-            content="Comprenez le badge XERA1, la provenance des médias et les signaux de confiance des profils."
+            content="Guide sur la vérification C2PA des médias (js/c2pa-utils.js), les règles d'obtention des badges de certification et la sécurité XERA1."
         />
         <meta
             property="og:url"
@@ -44,7 +44,7 @@
                 "@context": "https://schema.org",
                 "@type": "TechArticle",
                 "headline": "Trust & verification | XERA1 Docs",
-                "description": "Comprenez la vérification XERA1, la provenance des médias et les signaux de confiance des profils.",
+                "description": "Comprenez la vérification C2PA, les règles d'attribution des badges et la sécurité sur XERA1.",
                 "inLanguage": "fr",
                 "mainEntityOfPage": "https://docs.xera1.xyz/trust-and-verification.html",
                 "isPartOf": {
@@ -86,7 +86,7 @@
                         <div class="brand-tag">Docs</div>
                     </div>
                 </div>
-                <div class="sidebar-search">
+                <div class="sidebar-search" id="sidebar-search">
                     <span>⌘K</span>
                     <input
                         type="search"
@@ -112,6 +112,12 @@
                         href="trust-and-verification.html"
                         >Trust & verification</a
                     >
+                    <a class="nav-item" href="api-developers.html"
+                        >API / Developers</a
+                    >
+                    <a class="nav-item" href="founding-team.html"
+                        >Founding team</a
+                    >
                 </nav>
             </aside>
 
@@ -131,122 +137,65 @@
                 <div class="content-wrap">
                     <article class="doc-article">
                         <div class="eyebrow">05 / Trust & verification</div>
-                        <h1>Badge de certification et authenticité</h1>
+                        <h1>C2PA, Badges de Certification et Sécurité</h1>
 
                         <p>
-                            La confiance est centrale dans XERA1. Pour qu’un
-                            builder ou une entreprise soit crédible, sa présence
-                            doit être compréhensible, vérifiable et à la fois
-                            transparente et lisible.
+                            La crédibilité est le fondement de XERA1. Les mécanismes de vérification de provenance média et les critères d'attribution des badges garantissent que chaque membre évolue dans un écosystème de confiance.
                         </p>
+
+                        <h2>1. Provenance Média, Statut IA & C2PA</h2>
+                        <p>
+                            La vérification C2PA est <strong>réellement implémentée et fonctionnelle</strong> dans l'application (`js/c2pa-utils.js`).
+                        </p>
+                        <ul>
+                            <li><strong>Inspection à l'upload</strong> : Chaque média téléversé est analysé pour lire les manifests Content Credentials, identifier l'émetteur, l'historique des retouches et détecter les générateurs IA (Firefly, Midjourney, OpenAI, Stable Diffusion, etc.).</li>
+                            <li><strong>Badges visuels (`c2pa-badge`)</strong> : Les cartes du feed affichent un badge visuel attestant de la présence de métadonnées de provenance.</li>
+                            <li><strong>Modale détaillée (`xera-c2pa-modal`)</strong> : Un clic sur le badge ouvre une modale révélant l'origine exacte, le logiciel utilisé et le niveau d'intervention IA.</li>
+                        </ul>
+
+                        <h2>2. Critères Exacts d'Attribution des Badges</h2>
+                        <p>
+                            XERA1 définit 3 catégories précises de badges de certification :
+                        </p>
+
+                        <ol>
+                            <li>
+                                <strong>Badge `"tech"` (Automatique par cadence de travail)</strong> :
+                                <ul>
+                                    <li><strong>Attribution</strong> : Octroyé automatiquement si un utilisateur publie au moins un contenu par jour pendant <strong>7 jours consécutifs</strong>.</li>
+                                    <li><strong>Révocation</strong> : Automatiquement révoqué si aucune publication n'est réalisée pendant <strong>3 jours consécutifs</strong>.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Badges d'Abonnement (Monétisation & Plans)</strong> :
+                                <ul>
+                                    <li>`verified_gold` : Attribué aux abonnés du Plan Pro ou Elite.</li>
+                                    <li>`verified` : Attribué aux abonnés du Plan Standard ou Medium.</li>
+                                    <li>Ces badges restent actifs pendant toute la durée de l'abonnement.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Badges Registre Admin / Institutionnel</strong> :
+                                <ul>
+                                    <li>Badges `creator`, `staff`, et `page`.</li>
+                                    <li>Attribués manuellement par l'administration XERA1 après examen des demandes soumises via `verification_requests`.</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h2>3. Sécurité et Signalement</h2>
+                        <p>
+                            Plusieurs fonctionnalités de modération et de protection sont actives en production :
+                        </p>
+                        <ul>
+                            <li><strong>Blocage d'utilisateurs (`user_blocks`)</strong> : Permet de bloquer tout contact ou visibilité indésirable.</li>
+                            <li><strong>Boîte de retours (`feedback_inbox`)</strong> : Transmission de commentaires et retours d'expérience à l'équipe.</li>
+                            <li><strong>Auto-modération du Chat Live</strong> : Filtrage automatique des propos inappropriés lors des diffusions en direct.</li>
+                        </ul>
 
                         <div class="note-box">
-                            <strong>Règle de prudence :</strong> le badge, la
-                            provenance, le C2PA, le statut IA et les règles de
-                            sécurité ne sont pas implémentés dans ce workspace
-                            de manière vérifiable. Ces éléments doivent être
-                            testés dans le produit réel avant d’être présentés
-                            comme des garanties opérationnelles.
+                            <strong>Non implémenté / En cours de développement :</strong> Les endpoints de signalement direct de contenu (`/api/report`) envoyant vers un centre de modération centralisé ne sont pas encore ouverts. Les signalements passent actuellement par la boîte de retours générale.
                         </div>
-
-                        <h2>1. Le badge de certification XERA1</h2>
-                        <p>
-                            Le badge de certification atteste qu’un profil ou
-                            une page est cohérent avec les standards du réseau :
-                            présence claire, construit en public, preuve
-                            d’exécution et activité continue.
-                        </p>
-
-                        <ul>
-                            <li>présence structurée,</li>
-                            <li>preuves récentes et visibles,</li>
-                            <li>activité crédible et cohérente,</li>
-                            <li>
-                                alignement avec les standards d’authenticité.
-                            </li>
-                        </ul>
-
-                        <div class="callout">
-                            <strong>Important :</strong> tant que les critères
-                            exacts ne sont pas publiés et testés, il faut parler
-                            de
-                            <strong
-                                >critères de certification à confirmer</strong
-                            >, pas d’une garantie absolue.
-                        </div>
-
-                        <h2>2. Provenance média et transparence</h2>
-                        <p>
-                            Les médias publiés sur XERA1 doivent être lisibles
-                            comme des traces de travail, pas comme des contenus
-                            détachés du contexte. La provenance et la cohérence
-                            du récit importent autant que le support lui-même.
-                        </p>
-
-                        <ul>
-                            <li>conserver le média original ;</li>
-                            <li>décrire le contexte de création ;</li>
-                            <li>lier la preuve à un ARC ou un jalon ;</li>
-                            <li>
-                                indiquer les outils utilisés et les
-                                modifications importantes ;
-                            </li>
-                            <li>
-                                déclarer si le média est généré ou modifié par
-                                IA.
-                            </li>
-                        </ul>
-
-                        <h2>3. C2PA et statut IA</h2>
-                        <p>
-                            La provenance technique peut aider à expliquer
-                            l’histoire d’un fichier, mais elle ne remplace pas
-                            une vérification humaine. Un document portant une
-                            signature C2PA n’est pas automatiquement “vrai” dans
-                            tous les sens du terme, et une détection IA n’est
-                            pas parfaite sans règles publiques sur ses limites.
-                        </p>
-
-                        <ul>
-                            <li>qui déclare le statut IA ?</li>
-                            <li>
-                                est-ce un signal utilisateur ou un signal
-                                automatique ?
-                            </li>
-                            <li>peut-il être corrigé ?</li>
-                            <li>
-                                que signifie une valeur inconnue ou non fiable ?
-                            </li>
-                        </ul>
-
-                        <h2>4. Sécurité et signalement</h2>
-                        <p>
-                            La plateforme permet de protéger la qualité du
-                            réseau et d’éviter les contenus trompeurs ou
-                            inappropriés. Les signalements sont gérés dans le
-                            cadre d’un environnement de confiance.
-                        </p>
-
-                        <ul>
-                            <li>signaler un message ou un contenu abusif,</li>
-                            <li>revérifier l’origine et le contexte,</li>
-                            <li>
-                                maintenir une sphère de confiance propre aux
-                                builders,
-                            </li>
-                            <li>
-                                utiliser des mots de passe uniques et des règles
-                                de sécurité du compte.
-                            </li>
-                        </ul>
-
-                        <h2>5. Pourquoi c’est important</h2>
-                        <p>
-                            Sans signal de confiance, la plateforme se détériore
-                            en bruit. XERA1 s’appuie sur la notion de “preuve de
-                            travail” pour rendre les interactions plus
-                            pertinentes et plus fiables.
-                        </p>
                     </article>
                 </div>
             </main>

@@ -14,11 +14,13 @@ La documentation a été nettoyée pour se concentrer sur le vrai fonctionnement
 ## Nouvelle architecture
 
 - `docs.html` : page d'accueil de documentation et point d'entrée du site.
-- `getting-started.html` : onboarding, compte, première preuve et certification.
-- `pro-pages.html` : configuration des pages professionnelles et CTA.
-- `messaging-and-network.html` : messagerie et interactions B2B/B2C.
-- `search-and-discovery.html` : feed immersif et commande de recherche.
-- `trust-and-verification.html` : badge, provenance media, sécurité.
+- `getting-started.html` : connexion Email/OAuth, wizard 4 étapes, Arcs et publication de preuve.
+- `pro-pages.html` : éditeur de pages PRO, 3 CTA, capture de leads et membres d'équipe.
+- `messaging-and-network.html` : messagerie DMs (dm_conversations, dm_messages), Supabase Realtime et notifications push.
+- `search-and-discovery.html` : command palette (Cmd+K), recherche dans 3 entités DB et algorithme du feed.
+- `trust-and-verification.html` : vérification C2PA, attribution des badges (tech, payant, admin) et sécurité.
+- `api-developers.html` : API REST internes (/api/*) et statut de l'API publique tiers.
+- `founding-team.html` : équipe fondatrice, métriques réelles de production (292 membres) et tarification SaaS / KPay.
 - `styles.css` : design dark mode minimaliste du site.
 - `docs-app.js` : nav, recherche rapide et interactions UI.
 

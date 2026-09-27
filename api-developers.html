@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>API & Developers | XERA1 Docs</title>
+        <meta
+            name="description"
+            content="Informations développeurs et API sur XERA1 : API REST internes réservées à l'application web et statut de l'API publique pour les tiers."
+        />
+        <link
+            rel="canonical"
+            href="https://docs.xera1.xyz/api-developers.html"
+        />
+        <meta property="og:type" content="article" />
+        <meta
+            property="og:title"
+            content="API & Développeurs XERA1"
+        />
+        <meta
+            property="og:description"
+            content="Documentation sur l'architecture API de XERA1 : API REST internes et feuille de route de l'API publique tiers."
+        />
+        <meta
+            property="og:url"
+            content="https://docs.xera1.xyz/api-developers.html"
+        />
+        <meta
+            property="og:image"
+            content="https://docs.xera1.xyz/xera1_docs.jpeg"
+        />
+        <meta
+            property="og:image:alt"
+            content="Documentation XERA1 - Proof of Building"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:image"
+            content="https://docs.xera1.xyz/xera1_docs.jpeg"
+        />
+        <link rel="alternate" type="text/markdown" href="XERA1_COMPLETE_REFERENCE.md" title="Documentation complète de XERA1 (Markdown)" />
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "TechArticle",
+                "headline": "API & Developers | XERA1 Docs",
+                "description": "Information sur les API REST internes et la disponibilité future de l'API tiers XERA1.",
+                "inLanguage": "fr",
+                "mainEntityOfPage": "https://docs.xera1.xyz/api-developers.html",
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "XERA1 Docs",
+                    "url": "https://docs.xera1.xyz/"
+                }
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Documentation",
+                        "item": "https://docs.xera1.xyz/docs.html"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "API & Developers",
+                        "item": "https://docs.xera1.xyz/api-developers.html"
+                    }
+                ]
+            }
+        </script>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="app-shell">
+            <aside class="sidebar">
+                <div class="brand-wrap">
+                    <img src="logo.png" alt="XERA1 logo" class="brand-logo" />
+                    <div>
+                        <div class="brand-name">XERA1</div>
+                        <div class="brand-tag">Docs</div>
+                    </div>
+                </div>
+                <div class="sidebar-search" id="sidebar-search">
+                    <span>⌘K</span>
+                    <input
+                        type="search"
+                        placeholder="Search docs"
+                        aria-label="Rechercher"
+                    />
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Documentation</div>
+                    <a class="nav-item" href="docs.html">Accueil</a>
+                    <a class="nav-item" href="getting-started.html"
+                        >Getting started</a
+                    >
+                    <a class="nav-item" href="pro-pages.html">Pro pages</a>
+                    <a class="nav-item" href="messaging-and-network.html"
+                        >Messaging</a
+                    >
+                    <a class="nav-item" href="search-and-discovery.html"
+                        >Search & discovery</a
+                    >
+                    <a class="nav-item" href="trust-and-verification.html"
+                        >Trust & verification</a
+                    >
+                    <a class="nav-item active" href="api-developers.html"
+                        >API / Developers</a
+                    >
+                    <a class="nav-item" href="founding-team.html"
+                        >Founding team</a
+                    >
+                </nav>
+            </aside>
+
+            <main class="main-panel">
+                <header class="topbar">
+                    <div class="crumb">
+                        Documentation <span>›</span>
+                        <strong>API / Developers</strong>
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="ghost-button" id="command-k-trigger">
+                            Search docs
+                        </button>
+                    </div>
+                </header>
+
+                <div class="content-wrap">
+                    <article class="doc-article">
+                        <div class="eyebrow">06 / API & Developers</div>
+                        <h1>API et Intégrations Développeurs</h1>
+
+                        <p>
+                            Cette section documente le statut actuel de l'infrastructure API de XERA1 et les règles applicables aux développeurs.
+                        </p>
+
+                        <h2>1. Statut de l'API Publique pour les Tiers</h2>
+                        <div class="callout">
+                            <strong>Information importante :</strong> <strong>Aucune API publique pour les tiers</strong> n'est actuellement ouverte.
+                        </div>
+                        <ul>
+                            <li><strong>Pas de clés API tiers</strong> : Il n'existe pas de système de gestion ou de génération de `API_KEY` pour les applications externes.</li>
+                            <li><strong>Pas de serveur OAuth2 tiers</strong> : Les applications tierces ne peuvent pas utiliser XERA1 comme fournisseur d'identité OAuth2 pour le moment.</li>
+                            <li><strong>Pas de rate limiting tiers public</strong> : Les règles d'accès développeurs externes ne sont pas encore publiées.</li>
+                        </ul>
+
+                        <h2>2. Endpoints `/api/*` Internes</h2>
+                        <p>
+                            L'application web XERA1 consomme des endpoints REST sous `/api/*` (ex: `/api/ask`, `/api/health`, endpoints Supabase).
+                        </p>
+                        <p>
+                            Ces routes sont des <strong>API REST internes</strong> exclusivement réservées au fonctionnement de l'application web XERA1. Elles sont sécurisées par session et ne doivent pas être appelées par des scripts ou intégrations externes non autorisés.
+                        </p>
+
+                        <h2>3. Feuille de Route Développeurs</h2>
+                        <div class="note-box">
+                            <strong>Statut : Prochainement disponible / En cours de spécification</strong><br />
+                            L'API développeur officielle (permettant la publication automatisée de preuves, la lecture de métriques d'Arc et l'accès aux données publiques) est en cours de conception.
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <div
+            class="search-overlay hidden"
+            id="search-overlay"
+            aria-hidden="true"
+        >
+            <div class="search-panel">
+                <div class="search-input-row">
+                    <span class="search-icon">⌕</span>
+                    <input
+                        type="search"
+                        id="global-search-input"
+                        placeholder="Search the docs"
+                        aria-label="Recherche rapide"
+                    />
+                    <button class="close-search" aria-label="Fermer">×</button>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </div>
+
+        <script src="docs-app.js"></script>
+    </body>
+</html>
